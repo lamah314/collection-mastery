@@ -15,12 +15,6 @@ html {
     
 }
 body{
-    color: whitesmoke;
-    background: url('../html/img/guitar.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
 #app {
@@ -28,7 +22,7 @@ body{
 }
 
 .clickable:hover {
-    cursor: url(../html/img/flaming.gif) 32 30, auto;
+    
 }
 
 li {
