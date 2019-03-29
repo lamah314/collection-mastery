@@ -78,13 +78,9 @@ function renderMovieAndClips(movie) {
 }
 
 export default {
-    renderMovies, renderMoviesAdd,  renderAlbumsAndSongs, renderAlbumAndSongs, renderAlbumsHeaderAndSongs
+    renderMovies,
+    renderMoviesAdd,
+    renderAlbumsAndSongs,
+    renderAlbumAndSongs,
+    renderAlbumsHeaderAndSongs
 }
-
-{/* <section class="add__album">
-    <input type="hidden" class="add__album--artist album__id--${album.id}" placeholder="" value =${artistName}>
-    <input type="text" class="add__album--title" placeholder="title">
-    <input type="text" class="add__album--image" placeholder="image">
-    <input type="text" class="add__album--recordLabel" placeholder="recordLabel">
-    <button class="add__album--submit">Add Album</button>
-</section> */}
