@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Actress{
+public class Movie{
 
 	@Id
 	@GeneratedValue
@@ -22,8 +22,8 @@ public class Actress{
 
 	private String image;
 	
-	@ManyToMany(mappedBy = "actresses")
-	private Collection<Movie> movies;
+	@ManyToMany
+	private Collection<Actress> actresses;
 
 	@ManyToMany
 	private Collection<Tag> tags;
@@ -31,6 +31,9 @@ public class Actress{
 	@ElementCollection
 	@CollectionTable
 	private Collection<Rating> ratings;
+	
+	@OneToMany(mappedBy = "movie")
+	private Collection<Clip> clips;
 	
 	private double avgRating;
 
@@ -46,8 +49,8 @@ public class Actress{
 		return name;
 	}
 
-	public Collection<Movie> getMovies() {
-		return movies;
+	public Collection<Actress> getActresses() {
+		return actresses;
 	}
 
 	public Collection<Tag> getTags() {
@@ -58,40 +61,45 @@ public class Actress{
 		return ratings;
 	}
 	
+	public Collection<Clip> getClips() {
+		return clips;
+	}
+	
 	public double getAvgRating() {
 		return avgRating;
 	}
 
-	public Actress() {
+	public Movie() {
 	}
 
-	public Actress(String name, String image) {
+	public Movie(String name, String image) {
 		this.name = name;
 		this.image = image;
-		this.movies = new ArrayList<Movie>();
+		this.actresses = new ArrayList<Actress>();
 		this.tags = new ArrayList<Tag>();
 		this.ratings = new ArrayList<Rating>();
+		this.clips = new ArrayList<Clip>();
 		calculateAvgRating();
 	}
 
-	public void addMovieToActress(Movie movie) {
-		movies.add(movie);
+	public void addActressToMovie(Actress actress) {
+		actresses.add(actress);
 	}
-
-  public void addRatingToActress(Rating rating) {
-	  	ratings.add(rating);
+	
+	public void addRatingToMovie(Rating rating) {
+		ratings.add(rating);
 		calculateAvgRating();
 	}
 	
-	public void addTagToActress(Tag tag) {
+	public void addTagToMovie(Tag tag) {
 		tags.add(tag);
 	}
 	
-	public boolean checkMovieInActress(Movie movie) {
-		return movies.contains(movie);
+	public boolean checkActressInMovie(Actress actress) {
+		return actresses.contains(actress);
 	}
 	
-	public boolean checkTagInActress(Tag tag) {
+	public boolean checkTagInMovie(Tag tag) {
 		return tags.contains(tag);
 	}
 	

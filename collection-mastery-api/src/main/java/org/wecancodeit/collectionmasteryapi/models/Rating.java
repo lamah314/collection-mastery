@@ -19,10 +19,4 @@ public class Rating {
 		return rating;
 	}
 
-	@Override
-	public String toString() {
-		return "Rating [rating=" + rating + "]";
-	}
-
-
 }
