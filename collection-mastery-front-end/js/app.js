@@ -1,3 +1,6 @@
+
+
+
 // import events from './Utils/Events/event-actions'
 // import api from './Utils/API/api-actions'
 // import Artists from './Components/Artists'
@@ -11,6 +14,7 @@ main()
 
 function header() {
     getHeaderContext().innerHTML = Header()
+    // Main Page // 
 
     // events.on(getHeaderContext(), 'click', () => {
     //     if (event.target.classList.contains('logo')) {
@@ -38,9 +42,7 @@ function header() {
 
 function main() {
 
-    // api.getRequest('/artists', artists => {
-    //     getAppContext().innerHTML = LandingPage();
-    // })
+    getAppContext().innerHTML = LandingPage();
 
     // events.on(getAppContext(), 'click', () => {
     //     if (event.target.classList.contains('artist__name')) {
@@ -56,10 +58,10 @@ function main() {
     //             })
     //         })
     //     }
-    //     if (event.target.classList.contains('artist__image')) {
+    //     if (event.target.classList.contains('actress__image')) {
     //         const artistName = event.target.parentElement.querySelector('.artist__name').textContent
     //         var artistId
-    //         api.postRequest('/artists/nameToId', {
+    //         api.postRequest('/actresses/nameToId', {
     //             artistName: artistName
     //         }, (id)=> 
     //         {
