@@ -11,7 +11,7 @@ html {
     --primary: black;
     --secondary: white;
     --tertiary: rgb(80, 80, 80);
-    font: 20px/1.618 sans-serif;
+        font: 20px/1.618 sans-serif;
     
 }
 body{
@@ -21,9 +21,6 @@ body{
     width: minmax(300px, 50wh);
 }
 
-.clickable:hover {
-    
-}
 
 li {
     list-style-type: none;
