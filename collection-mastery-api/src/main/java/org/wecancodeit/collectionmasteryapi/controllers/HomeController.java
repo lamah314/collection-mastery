@@ -3,29 +3,25 @@ package org.wecancodeit.collectionmasteryapi.controllers;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.wecancodeit.albumcollection.repositories.AlbumRepository;
-import org.wecancodeit.albumcollection.repositories.ArtistRepository;
-import org.wecancodeit.albumcollection.repositories.SongRepository;
-import org.wecancodeit.albumcollection.repositories.TagRepository;
+import org.wecancodeit.collectionmasteryapi.repositories.ActressRepository;
+import org.wecancodeit.collectionmasteryapi.repositories.ClipRepository;
+import org.wecancodeit.collectionmasteryapi.repositories.MovieRepository;
+import org.wecancodeit.collectionmasteryapi.repositories.TagRepository;
 
 @Controller
 public class HomeController {
 
 	@Resource
-	ActressRepository artistRepo;
+	ActressRepository actressRepo;
 	@Resource
-	AlbumRepository albumRepo;
+	MovieRepository movieRepo;
 	@Resource
-	SongRepository songRepo;
+	ClipRepository clipRepo;
 	
 	@Resource
 	TagRepository tagRepo;
 	
-	
-//		@GetMapping("/")
-		public String Home() {
-			return "index";
-		}
+	public String Home() {
+		return "index";
+	}
 }
