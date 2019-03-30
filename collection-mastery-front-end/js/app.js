@@ -1,43 +1,46 @@
 
 
 
-// import events from './Utils/Events/event-actions'
-// import api from './Utils/API/api-actions'
-// import Artists from './Components/Artists'
-// import Albums from './Components/Albums'
-// import Songs from './Components/Songs'
-// import Header from './Components/header'
-// import LandingPage from './Components/landingPage'
+import events from './utils/events/event-actions'
+import api from './utils/api/api-actions'
+import Actresses from './Components/Actresses'
+import Movies from './Components/Movies'
+import Clips from './Components/Clips'
+import Header from './Components/header'
+import LandingPage from './Components/landingPage'
+import Footer from './Components/footer'
 
 header()
 main()
+footer()
 
 function header() {
+
     getHeaderContext().innerHTML = Header()
+
     // Main Page // 
 
-    // events.on(getHeaderContext(), 'click', () => {
-    //     if (event.target.classList.contains('logo')) {
-    //         api.getRequest('/artists', (artists) => {
-    //             getAppContext().innerHTML = LandingPage();
-    //         })
-    //     }
-    //     if (event.target.classList.contains('nav-artist')) {
-    //         api.getRequest('/artists', (artists) => {
-    //             getAppContext().innerHTML = Artists.renderArtists(artists);
-    //         })
-    //     }
-    //     if (event.target.classList.contains('nav-album')) {
-    //         api.getRequest('/albums', (albums) => {
-    //             getAppContext().innerHTML = Albums.renderAlbumsAdd(albums);
-    //         })
-    //     }
-    //     if (event.target.classList.contains('nav-song')) {
-    //         api.getRequest('/songs', (songs) => {
-    //             getAppContext().innerHTML = Songs.renderSongsAdd(songs);
-    //         })
-    //     }
-    // })  
+    events.on(getHeaderContext(), 'click', () => {
+        if (event.target.classList.contains('header-title')) {
+            getAppContext().innerHTML = LandingPage();
+           
+        }
+        if (event.target.classList.contains('nav-actress')) {
+            api.getRequest('/actresses', (actresses) => {
+                getAppContext().innerHTML = Actresses.renderActresses(actresses);
+            })
+        }
+        if (event.target.classList.contains('nav-movie')) {
+            api.getRequest('/movies', (movies) => {
+                getAppContext().innerHTML = Movies.renderMoviesAdd(movies);
+            })
+        }
+        if (event.target.classList.contains('nav-clip')) {
+            api.getRequest('/clips', (clips) => {
+                getAppContext().innerHTML = Clips.renderClipsAdd(clips);
+            })
+        }
+    })  
 }
 
 function main() {
@@ -75,10 +78,20 @@ function main() {
     // })
 }
 
+function footer() {
+
+    getAppContext().innerHTML = Footer();
+
+}
+
 function getHeaderContext() {
     return document.querySelector("#header");
 }
 
 function getAppContext() {
     return document.querySelector("#app");
+}
+
+function getFooterContext() {
+    return document.querySelector("#footer");
 }
