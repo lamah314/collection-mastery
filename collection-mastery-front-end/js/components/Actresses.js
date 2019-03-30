@@ -1,13 +1,13 @@
-function renderActresses(actress) {
+function renderActresses(actresses) {
     return ` 
     <div>
         <ul class="actresses">
-        ${actress.map(actress => {
-            // Actresses or Actress? 
+        ${actresses.map(actress => {
+            // Actress accesses 
         return ` 
                     <li class="actress">
                         <h5 class="actress__name clickable">${actress.name}</h5>
-                        <h3 class="actress__img><img src=">${actress.image}</h3>
+                        <img class="actress__image clickable"src="${actress.image}" /> 
                     </li>
                     `;
 

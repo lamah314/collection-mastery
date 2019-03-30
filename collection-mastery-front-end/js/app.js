@@ -32,7 +32,7 @@ function header() {
         }
         if (event.target.classList.contains('nav-movie')) {
             api.getRequest('http://localhost:8080/movies', movies => {
-            // api.getRequest('/movies', (movies) => { // Original Code 
+            // api.getRequest('/movies', (movies) => { // Original Code
                 getAppContext().innerHTML = Movies.renderMoviesAdd(movies);
             })
         }
