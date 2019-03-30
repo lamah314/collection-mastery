@@ -1,22 +1,12 @@
 import Actresses from './Actresses'
 import Movies from './Movies'
+import Clips from './Clips'
 import api from '../utils/api/api-actions'
 
-function addActress() {
-    return `
-    <section class="add__actress">
-        <h3>Add Actress</h3>
-        
-            <input type="select" class="add__actress-name" placeholder="Actress Name">
-            <input type="text" class="add__actress--image" placeholder="image">
-            <button class="add__actress--submit clickable">Add Actress</button>
-        </section> 
-        `
-}
 
 function addMovie() {
-    api.getRequest('/actresses', actresses => {    
-        document.querySelector('.add__movie-actress').innerHTML =  Actresses(actresses) 
+    api.getRequest('/actresses', actresses => {
+        document.querySelector('.add__movie-actress').innerHTML = Actresses(actresses)
     })
     return `
     <section class="add__album">
@@ -32,6 +22,17 @@ function addMovie() {
         `
 }
 
+function addActress() {
+    return `
+    <section class="add__actress">
+        <h3>Add Actress</h3>
+        
+            <input type="select" class="add__actress-name" placeholder="Actress Name">
+            <input type="text" class="add__actress--image" placeholder="image">
+            <button class="add__actress--submit clickable">Add Actress</button>
+        </section> 
+        `
+}
 function addMovieSpecific(actress) {
     return `
     <section class="add__movie">
@@ -51,36 +52,34 @@ function addClipSpecific(movie) {
     <section class="add__clip">
             <h3>Add Clip</h3>
             <input type="hidden" class="add__clip--album" value="${movie.id}">
-            <input type="text" class="add__clip--title" placeholder="title">
+            <input type="text" class="add__clip--title" placeholder="Clip title">
             <button class="add__clipSpecific--submit clickable">Add Clip</button>
         </section>
         `
 }
 
-function addSong() {
-    api.getRequest('/albums', albums => {    
-        document.querySelector('.add__song--album').innerHTML =  listAlbums(albums) 
+function addClip() {
+    api.getRequest('/movies', movies => {
+        document.querySelector('.add__clip--movie').innerHTML = Movies(movies)
     })
 
     return `
-    <section class="add__song">
-        <h3>Add Song</h3>
+    <section class="add__clip">
+        <h3>Add Clip</h3>
         
-            <select type="select" class="add__song--album" placeholder="Pick Album">
+            <select type="select" class="add__clip--movie" placeholder="Pick Movie">
             </select>
-            <input type="text" class="add__song--title" placeholder="title">
-            <input type="text" class="add__song--link" placeholder="link">
-            <input type="text" class="add__song--duration" placeholder="duration">
-            <button class="add__song--submit clickable">Add Song</button>
+            <input type="text" class="add__clip--clipLocation" placeholder="URL">
+            <button class="add__clip--submit clickable">Add Clip</button>
         </section>
         `
 }
 
-function addRatingAndCommentSong(song) {
+function addRatingClip(clip) {
     return `
-    <section class="add__rating__comment">
-        <h3>Add Rating and Comment to ${song.title}</h3>
-        <input type="hidden" class="add__songId" value="${song.id}">
+    <section class="add__rating__clip">
+        <h3>Add Rating to Clip</h3>
+        <input type="hidden" class="add__clipId" value="${clip.id}">
         <select type="select" class="add__rating" placeholder="Choose Rating">
             <option value=1>1</option> 
             <option value=2>2</option>
@@ -88,17 +87,16 @@ function addRatingAndCommentSong(song) {
             <option value=4>4</option>
             <option value=5>5</option> 
         </select>
-        <input type="text" class="add__comment--content" placeholder="comment">
-        <button class="add__songRatingComment--submit clickable">Add Comment</button>
+        <button class="add__clipRating--submit clickable">Add Rating</button>
     </section> 
         `
 }
 
-function addRatingAndCommentAlbum(album) {
+function addRatingMovie(movie) {
     return `
-    <section class="add__rating__comment">
-        <h3>Add Rating and Comment to ${album.title}</h3>
-        <input type="hidden" class="add__albumId" value="${album.id}">
+    <section class="add__rating__movie>
+        <h3>Add Rating to Movie</h3>
+        <input type="hidden" class="add__movieId" value="${movie.id}">
         <select type="select" class="add__rating" placeholder="Choose Rating">
             <option value=1>1</option> 
             <option value=2>2</option>
@@ -106,17 +104,16 @@ function addRatingAndCommentAlbum(album) {
             <option value=4>4</option>
             <option value=5>5</option> 
         </select>
-        <input type="text" class="add__comment--content" placeholder="comment">
-        <button class="add__albumRatingComment--submit clickable">Add Comment</button>
+        <button class="add__movieRating--submit clickable">Add Rating</button>
     </section> 
         `
 }
 
-function addRatingAndCommentArtist(artist) {
+function addRatingActress(actress) {
     return `
-    <section class="add__rating__comment">
-        <h3>Add Rating and Comment to ${artist.name}</h3>
-        <input type="hidden" class="add__artistId" value="${artist.id}">
+    <section class="add__rating__actress">
+        <h3>Add Rating to Actress</h3>
+        <input type="hidden" class="add__actressId" value="${actress.id}">
         <select type="select" class="add__rating" placeholder="Choose Rating">
             <option value=1>1</option> 
             <option value=2>2</option>
@@ -124,13 +121,12 @@ function addRatingAndCommentArtist(artist) {
             <option value=4>4</option>
             <option value=5>5</option> 
         </select>
-        <input type="text" class="add__comment--content" placeholder="comment">
-        <button class="add__artistRatingComment--submit clickable">Add Comment</button>
+        <button class="add__actressRating--submit clickable">Add Comment</button>
     </section> 
         `
 }
 
 
 export default {
-    addArtist, addAlbum, addSong, addRatingAndCommentSong, addRatingAndCommentAlbum, addRatingAndCommentArtist, addSongSpecific, addAlbumSpecific
+    addActress, addMovie, addClip, addRatingActress, addRatingMovie, addRatingActress, addClipSpecific, addMovieSpecific
 }
