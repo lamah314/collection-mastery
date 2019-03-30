@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ import org.wecancodeit.collectionmasteryapi.repositories.ClipRepository;
 import org.wecancodeit.collectionmasteryapi.repositories.MovieRepository;
 import org.wecancodeit.collectionmasteryapi.repositories.TagRepository;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/movies")
 public class MovieController {

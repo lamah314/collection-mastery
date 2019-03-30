@@ -20,15 +20,19 @@ function header() {
     events.on(getHeaderContext(), 'click', () => {
         if (event.target.classList.contains('header-title')) {
             getAppContext().innerHTML = LandingPage();
+            // api.getRequest('http://localhost:8080/actresses, actresses => {
            
         }
         if (event.target.classList.contains('nav-actress')) {
-            api.getRequest('/actresses', (actresses) => {
+        api.getRequest('http://localhost:8080/actresses', actresses => {
+            // api.getRequest('/actresses', (actresses) => { // Original Code 
+
                 getAppContext().innerHTML = Actresses.renderActresses(actresses);
             })
         }
         if (event.target.classList.contains('nav-movie')) {
-            api.getRequest('/movies', (movies) => {
+            api.getRequest('http://localhost:8080/movies', movies => {
+            // api.getRequest('/movies', (movies) => { // Original Code 
                 getAppContext().innerHTML = Movies.renderMoviesAdd(movies);
             })
         }

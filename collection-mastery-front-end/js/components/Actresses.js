@@ -3,6 +3,7 @@ function renderActresses(actresses) {
     <div>
         <ul class="actresses">
         ${actress.map(actress => {
+            // Actresses or Actress? 
         return ` 
                     <li class="actress">
                         <h5 class="actress__name clickable">${actress.name}</h5>
