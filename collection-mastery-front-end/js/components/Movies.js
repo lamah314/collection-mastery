@@ -8,7 +8,7 @@ function renderMovies(movies) {
     <div>
     <ul class="albums">
     ${movies.map(movie => {
-            return `
+        return `
 
                         <li class="movie">
                             <h5 class="movie__name clickable">${movie.name}</h5> 
@@ -16,8 +16,8 @@ function renderMovies(movies) {
                         </li>
                         
                     `;
-        })
-        .join("")}
+    })
+            .join("")}
         </ul>
         </div>
         `;
@@ -48,7 +48,7 @@ function renderMoviesAndClips(movies) {
         </div>
             `;
     })
-    .join("")}
+            .join("")}
     </ul>
     </div>
     `;
