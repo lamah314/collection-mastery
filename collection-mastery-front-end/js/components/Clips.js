@@ -1,7 +1,4 @@
 import Add from './add'
-import Comments from './ratings'
-
-
 
 // List the Clips // 
 function renderClips(clips) {
@@ -46,6 +43,6 @@ function renderClip(clip) {
         // Adding the Ability // 
 }
 export default {
-    renderClipsAdd, renderClip,
+    renderClipsAdd, renderClip, renderClips
 }
         

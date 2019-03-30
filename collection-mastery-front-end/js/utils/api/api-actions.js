@@ -1,5 +1,5 @@
 function getRequest(location, callback) {
-    fetch(location)
+    fetch('http://localhost:8080' + location)
     .then(response => response.json())
     .then(data => callback(data))
     .catch(err => console.log(err))
@@ -7,7 +7,7 @@ function getRequest(location, callback) {
 }
 
 function postRequest(location, requestBody, callback) {
-    fetch(location, {
+    fetch('http://localhost:8080' + location, {
         method: "POST",
         body: JSON.stringify(requestBody)
     })

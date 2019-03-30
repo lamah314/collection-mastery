@@ -1,5 +1,3 @@
-// Stick Imports Up Here // 
-
 function renderActresses(actresses) {
     return ` 
     <div>

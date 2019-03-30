@@ -1,6 +1,5 @@
 import Clips from './Clips'
-import Add from './add'
-import Comments from './comments'
+import Add from './Add'
 
 
 function renderMovies(movies) {
@@ -80,7 +79,7 @@ function renderMovieAndClips(movie) {
 export default {
     renderMovies,
     renderMoviesAdd,
-    renderAlbumsAndSongs,
-    renderAlbumAndSongs,
-    renderAlbumsHeaderAndSongs
+    renderMoviesAndClips,
+    renderMoviesHeaderAndClips,
+    renderMovieAndClips
 }

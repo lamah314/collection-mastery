@@ -1,6 +1,3 @@
-
-
-
 import events from './utils/events/event-actions'
 import api from './utils/api/api-actions'
 import Actresses from './Components/Actresses'
