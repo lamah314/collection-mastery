@@ -1,4 +1,4 @@
-function renderActresses(actresses) {
+function renderActresses(actress) {
     return ` 
     <div>
         <ul class="actresses">

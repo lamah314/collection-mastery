@@ -23,7 +23,7 @@ import org.wecancodeit.collectionmasteryapi.repositories.TagRepository;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/artists")
+@RequestMapping("/actresses")
 public class ActressController {
 	
 	@Resource
@@ -52,8 +52,8 @@ public class ActressController {
 	}
 	
 	@PostMapping("/addActress")
-	public Collection<Actress> addArtist(@RequestBody String newArtist) throws JSONException{
-		JSONObject json = new JSONObject(newArtist);
+	public Collection<Actress> addArtist(@RequestBody String newActress) throws JSONException{
+		JSONObject json = new JSONObject(newActress);
 		actressRepo.save(new Actress(json.getString("name"), json.getString("image")));
 		return (Collection<Actress>) actressRepo.findAll();
 	}
