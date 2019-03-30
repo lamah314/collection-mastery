@@ -7,6 +7,6 @@ import org.wecancodeit.collectionmasteryapi.models.Tag;
 @Repository
 public interface TagRepository extends CrudRepository<Tag, Long> {
 
-	Tag findByName(String name);
+	Tag findByTag(String tag);
 
 }

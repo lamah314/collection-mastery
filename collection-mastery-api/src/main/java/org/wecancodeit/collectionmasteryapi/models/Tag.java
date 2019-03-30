@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Tag {
 
@@ -22,12 +24,15 @@ public class Tag {
 	private String tag;
 
 	@ManyToMany(mappedBy= "tags")
+	@JsonIgnore
 	private Collection<Actress> actresses;
 
 	@ManyToMany(mappedBy= "tags")
+	@JsonIgnore
 	private Collection<Movie> movies;
 
 	@ManyToMany(mappedBy= "tags")
+	@JsonIgnore
 	private Collection<Clip> clips;
 
 	public Tag() {

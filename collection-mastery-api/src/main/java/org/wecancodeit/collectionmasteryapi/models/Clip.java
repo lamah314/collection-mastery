@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Clip {
 
@@ -22,7 +24,8 @@ public class Clip {
 	private String clipLocation;
 
 	@ManyToOne
-	private Collection<Movie> movies;
+	@JsonIgnore
+	private Movie movie;
 
 	@ManyToMany
 	private Collection<Tag> tags;
@@ -41,8 +44,8 @@ public class Clip {
 		return clipLocation;
 	}
 
-	public Collection<Movie> getMovies() {
-		return movies;
+	public Movie getMovie() {
+		return movie;
 	}
 
 	public Collection<Tag> getTags() {
@@ -62,14 +65,13 @@ public class Clip {
 
 	public Clip(String clipLocation) {
 		this.clipLocation = clipLocation;
-		this.movies = new ArrayList<Movie>();
 		this.tags = new ArrayList<Tag>();
 		this.ratings = new ArrayList<Rating>();
 		calculateAvgRating();
 	}
 
 	public void addMovieToClip(Movie movie) {
-		movies.add(movie);
+		this.movie = movie;
 	}
 
 	public void addRatingToClip(Rating rating) {
@@ -82,7 +84,7 @@ public class Clip {
 	}
 
 	public boolean checkMovieInClip(Movie movie) {
-		return movies.contains(movie);
+		return this.movie.equals(movie);
 	}
 
 	public boolean checkTagInArtist(Tag tag) {

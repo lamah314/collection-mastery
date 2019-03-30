@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Movie{
 
@@ -23,6 +25,7 @@ public class Movie{
 	private String image;
 	
 	@ManyToMany
+	@JsonIgnore
 	private Collection<Actress> actresses;
 
 	@ManyToMany
