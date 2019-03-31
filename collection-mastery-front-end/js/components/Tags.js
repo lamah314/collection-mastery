@@ -51,7 +51,7 @@ function renderTag(tagId) {
         document.querySelector('.tag--actress').innerHTML = Actresses.renderActressesHeader(actresses)
     })
     api.getRequest('http://localhost:8080/tags/'+ tagId +'/movie', movies => {
-        document.querySelector('.tag--movie').innerHTML = Movies.renderMoviesHeaderr(movies)
+        document.querySelector('.tag--movie').innerHTML = Movies.renderMoviesHeader(movies)
     })
     api.getRequest('http://localhost:8080/tags/'+ tagId +'/clip', clips => {
         document.querySelector('.tag--clip').innerHTML = Clips.renderClipsHeader(clips)

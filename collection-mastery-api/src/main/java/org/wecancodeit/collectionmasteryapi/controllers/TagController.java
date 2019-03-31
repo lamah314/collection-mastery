@@ -49,7 +49,7 @@ public class TagController {
 		return tagRepo.findById(tagId).get();
 	}
 	
-	@GetMapping("/{tagId}/Actress")
+	@GetMapping("/{tagId}/actress")
 	public Collection<Actress> getActressesOfTag(@PathVariable Long tagId) {
 		Collection<Actress> actressList = new ArrayList<Actress>();
 		Tag tag = tagRepo.findById(tagId).get();
@@ -61,7 +61,7 @@ public class TagController {
 		return actressList;
 	}
 	
-	@GetMapping("/{tagId}/Movie")
+	@GetMapping("/{tagId}/movie")
 	public Collection<Movie> getMoviesOfTag(@PathVariable Long tagId) {
 		Collection<Movie> movieList = new ArrayList<Movie>();
 		Tag tag = tagRepo.findById(tagId).get();
@@ -73,7 +73,7 @@ public class TagController {
 		return movieList;
 	}
 	
-	@GetMapping("/{tagId}/Clip")
+	@GetMapping("/{tagId}/clip")
 	public Collection<Clip> getClipsOfTag(@PathVariable Long tagId) {
 		Collection<Clip> clipList = new ArrayList<Clip>();
 		Tag tag = tagRepo.findById(tagId).get();
