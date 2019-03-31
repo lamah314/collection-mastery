@@ -1,9 +1,14 @@
+import Add from './Add'
+
+
+
+
 function renderActresses(actresses) {
     return ` 
     <div>
         <ul class="actresses">
         ${actresses.map(actress => {
-            // Actress accesses 
+        // Actress accesses 
         return ` 
                     <li class="actress">
                         <h5 class="actress__name clickable">${actress.name}</h5>
@@ -28,7 +33,17 @@ function listActresses(actresses) {
     })
         .join(""))
 }
+// User Input Menu to add Actress // 
+function renderActressesAdd(actresses) {
+    return `
+        ${renderActresses(actresses)}
+        <div class="user-input">
+        ${Add.addActress()}
+    </div>
+        `;
+}
+
 
 export default {
-    renderActresses, listActresses,
+    renderActresses, listActresses, renderActressesAdd
 }

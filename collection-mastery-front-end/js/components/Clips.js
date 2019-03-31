@@ -1,4 +1,4 @@
-import Add from './add'
+import Add from './Add'
 
 // List the Clips // 
 function renderClips(clips) {
