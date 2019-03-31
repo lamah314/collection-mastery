@@ -1,5 +1,6 @@
 import Add from './Add'
 import Movies from './Movies'
+import Tags from './Tags'
 
 function renderActresses(actresses) {
     return ` 
