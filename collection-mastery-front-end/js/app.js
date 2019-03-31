@@ -131,7 +131,16 @@ function main() {
                 
             })
         }
-
+        
+        if (event.target.classList.contains('remove__actress--submit')) {
+            var actressId = event.target.parentElement.querySelector('.remove__list--actress').value
+            api.postRequest('http://localhost:8080/actresses/removeActress', {
+                actressId: actressId
+            }, (actresses)=> 
+            {
+                getAppContext().innerHTML = Actresses.renderActresses(actresses);
+            })
+        }
     })
 }
 

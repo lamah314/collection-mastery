@@ -74,9 +74,20 @@ public class Actress{
 		calculateAvgRating();
 	}
 
+	public void removeCollections() {
+		for (Movie movie: movies) {
+			movie.deleteActressFromMovie(this);
+		}
+		for (Tag tag: tags) {
+			tag.deleteActressFromTag(this);
+		}
+	}
+	
 	public void addMovieToActress(Movie movie) {
 		movies.add(movie);
 	}
+	
+	
 
   public void addRatingToActress(Rating rating) {
 	  	ratings.add(rating);

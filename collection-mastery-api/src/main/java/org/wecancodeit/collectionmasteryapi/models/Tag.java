@@ -69,6 +69,10 @@ public class Tag {
 		actresses.add(actress);
 	}
 	
+	public void deleteActressFromTag(Actress actress) {
+		actresses.remove(actress);
+	}
+	
 	public void addMovietoTag(Movie movie) {
 		movies.add(movie);
 	}
@@ -88,6 +92,8 @@ public class Tag {
 	public boolean checkClipInTag(Clip clip) {
 		return clips.contains(clip);
 	}
+
+
 
 
 }

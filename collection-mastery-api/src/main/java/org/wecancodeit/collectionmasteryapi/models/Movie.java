@@ -89,6 +89,10 @@ public class Movie{
 		actresses.add(actress);
 	}
 	
+	public void deleteActressFromMovie(Actress actress) {
+		actresses.remove(actress);
+	}
+	
 	public void addRatingToMovie(Rating rating) {
 		ratings.add(rating);
 		calculateAvgRating();
@@ -117,5 +121,7 @@ public class Movie{
 			avgRating = sum/count;
 		}
 	}
+
+	
 
 }

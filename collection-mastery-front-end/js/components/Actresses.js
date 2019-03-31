@@ -1,4 +1,5 @@
 import Add from './Add'
+import Remove from './Remove'
 import Movies from './Movies'
 import Tags from './Tags'
 
@@ -21,6 +22,7 @@ function renderActresses(actresses) {
     </div>
     <div class="user-input">
     ${Add.addActress()}
+    ${Remove.removeActress()}
 </div>
         `;
 }
@@ -28,7 +30,21 @@ function renderActresses(actresses) {
 function renderActressesHeader(actresses) {
     return `
         <h4 class="Actress__header">Actresses</h4>
-        ${this.renderActresses(actresses)}
+        <div>
+        <ul class="actresses">
+        ${actresses.map(actress => {
+        // Actress accesses 
+        return ` 
+                    <li class="actress">
+                        <h5 class="actress__name clickable">${actress.name}</h5>
+                        <img class="actress__image clickable"src="${actress.image}" /> 
+                    </li>
+                    `;
+
+    })
+            .join("")}
+        </ul>
+    </div>
     `
 }
 

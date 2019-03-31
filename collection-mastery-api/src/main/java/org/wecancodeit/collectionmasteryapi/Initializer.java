@@ -63,8 +63,7 @@ public class Initializer implements CommandLineRunner {
 		clip1.addMovieToClip(movie1);
 		clip2.addMovieToClip(movie2);
 		clip3.addMovieToClip(movie3);
-		clip4.addMovieToClip(movie4);
-			
+		clip4.addMovieToClip(movie4);	
 		
 		actress1.addRatingToActress(rating1);
 		actress2.addRatingToActress(rating2);
@@ -82,6 +81,8 @@ public class Initializer implements CommandLineRunner {
 		
 		movie2.addTagToMovie(tag1);
 		movie3.addTagToMovie(tag1);
+		
+		clip2.addTagToClip(tag1);
 		
 		actressRepo.save(actress1);
 		actressRepo.save(actress2);

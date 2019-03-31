@@ -58,6 +58,15 @@ public class ActressController {
 		return (Collection<Actress>) actressRepo.findAll();
 	}
 	
+	@PostMapping("/removeActress")
+	public Collection<Actress> removeArtist(@RequestBody String actressId) throws JSONException{
+		JSONObject json = new JSONObject(actressId);
+		Actress actress = actressRepo.findById(Long.parseLong(json.getString("actressId"))).get();
+		actress.removeCollections();
+		actressRepo.delete(actress);
+		return (Collection<Actress>) actressRepo.findAll();
+	}
+	
 	@PostMapping("/nameToId")
 	public Long convertNameToId(@RequestBody String actressName) throws JSONException {
 		JSONObject json = new JSONObject(actressName);
