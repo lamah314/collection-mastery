@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 import org.wecancodeit.collectionmasteryapi.models.Actress;
+import org.wecancodeit.collectionmasteryapi.models.Clip;
 import org.wecancodeit.collectionmasteryapi.models.Movie;
 import org.wecancodeit.collectionmasteryapi.models.Rating;
 import org.wecancodeit.collectionmasteryapi.models.Tag;
@@ -49,10 +50,23 @@ public class Initializer implements CommandLineRunner {
 		Movie movie3 = new Movie("Black Swan", "../images/natalie_blackswan.jpg");
 		Movie movie4 = new Movie("Hunger Games", "../images/jenniferlawrence_hunger_games.jpg");
 		
+		Clip clip1 = new Clip("https://www.youtube.com/embed/H44t5gJ6KN4?start=123"); // Scarlett
+		Clip clip2 = new Clip("https://www.youtube.com/embed/MS5oNxCQZWQ?start=138"); // Gal Gadot
+		Clip clip3 = new Clip("https://www.youtube.com/embed/CsvtIzebNcw?start=19"); // Natalie Portman
+		Clip clip4 = new Clip("https://www.youtube.com/embed/e3PJ3Du_zDc?start=19"); // Jennifer Lawrence
+		
+		
+		
 		movie1.addActressToMovie(actress1);
 		movie2.addActressToMovie(actress2);
 		movie3.addActressToMovie(actress3);
 		movie4.addActressToMovie(actress4);
+		
+		clip1.addMovieToClip(movie1);
+		clip2.addMovieToClip(movie2);
+		clip3.addMovieToClip(movie3);
+		clip4.addMovieToClip(movie4);
+			
 		
 		actress1.addRatingToActress(rating1);
 		actress2.addRatingToActress(rating2);
@@ -80,5 +94,11 @@ public class Initializer implements CommandLineRunner {
 		movieRepo.save(movie2);
 		movieRepo.save(movie3);
 		movieRepo.save(movie4);
+		
+		clipRepo.save(clip1); 
+		clipRepo.save(clip2);
+		clipRepo.save(clip3);
+		clipRepo.save(clip4);
+		
 	}
 }
