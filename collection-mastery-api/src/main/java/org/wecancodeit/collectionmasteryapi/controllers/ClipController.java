@@ -80,7 +80,7 @@ public class ClipController {
 	@PostMapping("/addTag")
 	public Clip AddTagToClip(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
-		Tag tag = new Tag(json.getString("tag"));
+		Tag tag = tagRepo.findById(Long.parseLong(json.getString("tagId"))).get();
 		Clip clip = clipRepo.findById(Long.parseLong(json.getString("clipId"))).get();
 		clip.addTagToClip(tag);
 		clipRepo.save(clip);

@@ -69,7 +69,7 @@ public class ActressController {
 	public Actress AddRatingToActress(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
 		Rating rating = new Rating(Integer.parseInt(json.getString("rating")));
-		Actress actress = actressRepo.findById(Long.parseLong(json.getString("artistId"))).get();
+		Actress actress = actressRepo.findById(Long.parseLong(json.getString("actressId"))).get();
 		actress.addRatingToActress(rating);
 		actressRepo.save(actress);
 		return actress;
@@ -78,8 +78,8 @@ public class ActressController {
 	@PostMapping("/addTag")
 	public Actress AddTagToActress(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
-		Tag tag = new Tag(json.getString("tag"));
-		Actress actress = actressRepo.findById(Long.parseLong(json.getString("artistId"))).get();
+		Tag tag = tagRepo.findById(Long.parseLong(json.getString("tagId"))).get();
+		Actress actress = actressRepo.findById(Long.parseLong(json.getString("actressId"))).get();
 		actress.addTagToActress(tag);
 		actressRepo.save(actress);
 		return actress;

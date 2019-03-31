@@ -60,15 +60,20 @@ function renderMoviesHeaderAndClips(movies) {
     `
 }
 
+function renderMoviesHeader(movies) {
+    return `
+        <h4 class="Movie__header">Movies</h4>
+        ${this.renderMovies(movies)}
+    `
+}
+
 function renderMovieAndClips(movie) {
     return `
         <h2 class="movie__name">${movie.name}</h2> 
         <img class= "movie__image" src="${movie.image}" />  
             ${Clips.renderClipsHeader(movie.clips)}  
         <br>
-        <h4 class="movie__rating">Average Rating: ${movie.avgRating}</h4>
-        <h4 class="movie__comments">Comments</h4>
-            ${Comments.renderMovieComments(movie)} 
+        <h4 class="movie__rating">Average Rating: ${movie.avgRating}</h4> 
         <div class="user-input">
             ${Add.addClipSpecific(movie)}
             ${Add.addRatingMovie(movie)}
@@ -91,6 +96,7 @@ export default {
     renderMoviesAdd,
     renderMoviesAndClips,
     renderMoviesHeaderAndClips,
+    renderMoviesHeader,
     renderMovieAndClips,
     listMovies
 }
