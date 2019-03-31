@@ -6,7 +6,7 @@ import api from '../utils/api/api-actions'
 
 function addMovie() {
     api.getRequest('/actresses', actresses => {
-        document.querySelector('.add__movie-actress').innerHTML = Actresses(actresses)
+        document.querySelector('.add__movie-actress').innerHTML = Actresses.listActresses(actresses)
     })
     return `
     <section class="add__album">
@@ -15,8 +15,8 @@ function addMovie() {
             <select type="select" class="add__movie--actress" placeholder="Pick Actress">
             
             </select>                 
-            <input type="text" class="add__actress--name" placeholder="title">
-            <input type="text" class="add__actress--image" placeholder="image">
+            <input type="text" class="add__movie--name" placeholder="title">
+            <input type="text" class="add__movie--image" placeholder="image">
             <button class="add__movie--submit clickable">Add Movie</button>
         </section>
         `
@@ -27,12 +27,13 @@ function addActress() {
     <section class="add__actress">
         <h3>Add Actress</h3>
         
-            <input type="select" class="add__actress-name" placeholder="Actress Name">
+            <input type="select" class="add__actress--name" placeholder="Actress Name">
             <input type="text" class="add__actress--image" placeholder="image">
             <button class="add__actress--submit clickable">Add Actress</button>
         </section> 
         `
 }
+
 function addMovieSpecific(actress) {
     return `
     <section class="add__movie">
@@ -60,7 +61,7 @@ function addClipSpecific(movie) {
 
 function addClip() {
     api.getRequest('/movies', movies => {
-        document.querySelector('.add__clip--movie').innerHTML = Movies(movies)
+        document.querySelector('.add__clip--movie').innerHTML = Movies.listMovies(movies)
     })
 
     return `
@@ -121,12 +122,74 @@ function addRatingActress(actress) {
             <option value=4>4</option>
             <option value=5>5</option> 
         </select>
-        <button class="add__actressRating--submit clickable">Add Comment</button>
+        <button class="add__actressRating--submit clickable">Add Rating</button>
+    </section> 
+        `
+}
+
+function addTagActress(actress) {
+    return `
+    <section class="add__tag__actress">
+        <h3>Add Tag to Actress</h3>
+        <input type="hidden" class="add__actressId" value="${actress.id}">
+        <select type="select" class="add__rating" placeholder="Choose Rating">
+            <option value=1>1</option> 
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option> 
+        </select>
+        <button class="add__actressRating--submit clickable">Add Tag</button>
+    </section> 
+        `
+}
+
+function addTagMovie(movie) {
+    return `
+    <section class="add__tag__movie">
+        <h3>Add Tag to Movie</h3>
+        <input type="hidden" class="add__movieId" value="${movie.id}">
+        <select type="select" class="add__rating" placeholder="Choose Rating">
+            <option value=1>1</option> 
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option> 
+        </select>
+        <button class="add__movieRating--submit clickable">Add Tag</button>
+    </section> 
+        `
+}
+
+function addTagClip(clip) {
+    return `
+    <section class="add__tag__clip">
+        <h3>Add Tag to Clip</h3>
+        <input type="hidden" class="add__clipId" value="${clip.id}">
+        <select type="select" class="add__rating" placeholder="Choose Rating">
+            <option value=1>1</option> 
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option> 
+        </select>
+        <button class="add__clipRating--submit clickable">Add Tag</button>
     </section> 
         `
 }
 
 
 export default {
-    addActress, addMovie, addClip, addRatingActress, addRatingMovie, addRatingActress, addClipSpecific, addMovieSpecific
+    addActress,
+    addMovie,
+    addClip,
+    addRatingActress,
+    addRatingMovie,
+    addRatingClip,
+    addRatingActress,
+    addClipSpecific,
+    addMovieSpecific,
+    addTagActress,
+    addTagMovie,
+    addTagClip
 }

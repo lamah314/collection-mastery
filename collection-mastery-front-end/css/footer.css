@@ -1,7 +1,8 @@
 .footer {
+    position: fixed;
     width: 100%;
-    color: var(--secondary);
-    background-color: var(--primary);
+    color: var(--tertiary);
+    background-image: linear-gradient(to right, var(--secondary),var(--primary));
     opacity: 8;
     left: 0;
     bottom: 0;

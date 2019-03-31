@@ -1,0 +1,2 @@
+.user-input{flex-direction:row;justify-content:space-between;background-color:#000;color:var(--secondary);border:5px solid pink;position:fixed;bottom:50px;right:0}.user-input,[class^=add__]{display:flex;align-items:center}[class^=add__]{flex-direction:column;padding:0 5px}
+/*# sourceMappingURL=/userInput.20f2fa4d.css.map */

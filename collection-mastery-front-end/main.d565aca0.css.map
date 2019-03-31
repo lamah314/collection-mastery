@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.css"],"names":[],"mappings":"AAAA,IACI,WAAY,CACZ,WACJ","file":"main.d565aca0.css","sourceRoot":"..\\html","sourcesContent":["img {\r\n    height: auto;\r\n    width: 400px;\r\n}\r\n\r\n#app {\r\n    /* height: 100vh; */\r\n}"]}

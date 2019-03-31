@@ -9,9 +9,9 @@ a {
 } */
 
 html {
-    --primary: black;
+    --primary: purple;
     --secondary: white;
-    --tertiary: rgb(80, 80, 80);
+    --tertiary: orange;
     font: 20px/1.618 sans-serif;
 }
 
