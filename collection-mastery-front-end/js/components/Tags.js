@@ -1,5 +1,8 @@
+import Actresses from './Actresses'
+import Movies from './Movies'
 import Clips from './Clips'
 import Add from './Add'
+import api from '../utils/api/api-actions'
 
 // List All Tags //
 
@@ -42,13 +45,31 @@ function listTags(tags) {
     })
         .join(""))
 }
+
+function renderTag(tagId) {
+    api.getRequest('http://localhost:8080/tags/'+ tagId +'/actress', actresses => {
+        document.querySelector('.tag--actress').innerHTML = Actresses.renderActressesHeader(actresses)
+    })
+    api.getRequest('http://localhost:8080/tags/'+ tagId +'/movie', movies => {
+        document.querySelector('.tag--movie').innerHTML = Movies.renderMoviesHeaderr(movies)
+    })
+    api.getRequest('http://localhost:8080/tags/'+ tagId +'/clip', clips => {
+        document.querySelector('.tag--clip').innerHTML = Clips.renderClipsHeader(clips)
+    })
+    return ` 
+    <div>
+        <div class="tag--actress"></div>
+        <div class="tag--movie"></div>
+        <div class="tag--clip"></div>
+    </div>  
+        `;
+}
     
     
 
 export default {
 renderTags,
 renderTagsAdd, 
-listTags
-
-
+listTags,
+renderTag
 }

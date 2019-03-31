@@ -1,4 +1,5 @@
 import Add from './Add'
+import Tags from './Tags'
 
 // List the Clips // 
 function renderClips(clips) {
@@ -8,6 +9,7 @@ function renderClips(clips) {
         ${clips.map(clip => {
             return ` 
                     <li class="clip">
+                        <h5 class="clip__name clickable">${clip.name}</h5> 
                         <iframe class="clip__embedded clickable" width="560" height="315" src="${clip.clipLocation}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </li>
                     `;
@@ -42,8 +44,8 @@ function renderClip(clip) {
     return ` 
         <iframe class="landingClip" width="560" height="315" src="${clip.clipLocation}&autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <h4 class="clip__rating">Average Rating: ${clip.avgRating}</h4>
-        <h4 class="clip__comments">Comments</h4>
-            ${Comments.renderClipComments(clip)}
+        <h4 class="clip__tags">Tags</h4>
+            ${Tags.renderTags(clip.tags)}
         <div class="user-input">
             ${Add.addRatingClip(clip)}
             ${Add.addTagToClip(clip)}

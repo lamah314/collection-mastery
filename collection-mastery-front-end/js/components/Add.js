@@ -7,11 +7,11 @@ import api from '../utils/api/api-actions'
 
 function addMovie() {
     api.getRequest('http://localhost:8080/actresses', actresses => {
-        document.querySelector('.add__movie-actress').innerHTML = Actresses.listActresses(actresses)
+        document.querySelector('.add__movie--actress').innerHTML = Actresses.listActresses(actresses)
     })
     return `
     <section class="add__album">
-        <h3>Add Album</h3>
+        <h3>Add Movie</h3>
         
             <select type="select" class="add__movie--actress" placeholder="Pick Actress">
             

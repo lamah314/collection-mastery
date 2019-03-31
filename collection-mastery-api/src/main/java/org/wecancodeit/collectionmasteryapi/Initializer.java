@@ -50,12 +50,10 @@ public class Initializer implements CommandLineRunner {
 		Movie movie3 = new Movie("Black Swan", "../images/natalie_blackswan.jpg");
 		Movie movie4 = new Movie("Hunger Games", "../images/jenniferlawrence_hunger_games.jpg");
 		
-		Clip clip1 = new Clip("https://www.youtube.com/embed/H44t5gJ6KN4?start=123"); // Scarlett
-		Clip clip2 = new Clip("https://www.youtube.com/embed/MS5oNxCQZWQ?start=138"); // Gal Gadot
-		Clip clip3 = new Clip("https://www.youtube.com/embed/CsvtIzebNcw?start=19"); // Natalie Portman
-		Clip clip4 = new Clip("https://www.youtube.com/embed/e3PJ3Du_zDc?start=19"); // Jennifer Lawrence
-		
-		
+		Clip clip1 = new Clip("Interrogation", "https://www.youtube.com/embed/H44t5gJ6KN4?start=123"); // Scarlett
+		Clip clip2 = new Clip("Ooowahhh", "https://www.youtube.com/embed/MS5oNxCQZWQ?start=138"); // Gal Gadot
+		Clip clip3 = new Clip("Dance Scene", "https://www.youtube.com/embed/CsvtIzebNcw?start=19"); // Natalie Portman
+		Clip clip4 = new Clip("Reaping", "https://www.youtube.com/embed/e3PJ3Du_zDc?start=19"); // Jennifer Lawrence
 		
 		movie1.addActressToMovie(actress1);
 		movie2.addActressToMovie(actress2);

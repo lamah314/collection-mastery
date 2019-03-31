@@ -23,7 +23,13 @@ function renderActresses(actresses) {
     ${Add.addActress()}
 </div>
         `;
+}
 
+function renderActressesHeader(actresses) {
+    return `
+        <h4 class="Actress__header">Actresses</h4>
+        ${this.renderActresses(actresses)}
+    `
 }
 
 function listActresses(actresses) {
@@ -41,7 +47,7 @@ function renderActressAndMovies(actress) {
     <div>
         <h5 class="actress__name clickable">${actress.name}</h5>
         <img class="actress__image clickable"src="${actress.image}" /> 
-        ${Movies.renderMovies(actress.movies)}
+        ${Movies.renderMoviesHeader(actress.movies)}
     </div>
     <div class="user-input">
         ${Add.addMovieSpecific(actress)}
@@ -53,5 +59,5 @@ function renderActressAndMovies(actress) {
 }
 
 export default {
-    renderActresses, listActresses, renderActressAndMovies
+    renderActresses, renderActressesHeader, listActresses, renderActressAndMovies
 }

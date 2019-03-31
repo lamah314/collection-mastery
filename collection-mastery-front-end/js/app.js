@@ -106,7 +106,32 @@ function main() {
                 })
             })
         }
-       
+        if (event.target.classList.contains('clip__name')) {
+            const clipName = event.target.parentElement.querySelector('.clip__name').textContent
+            var clipId
+            api.postRequest('http://localhost:8080/clips/nameToId', {
+                clipName: clipName
+            }, (id)=> 
+            {
+                clipId = id
+                api.getRequest(('http://localhost:8080/clips/' + clipId), (clip) => {
+                    getAppContext().innerHTML = Clips.renderClip(clip);
+                })
+            })
+        }
+        if (event.target.classList.contains('tag_type')) {
+            const tagName = event.target.parentElement.querySelector('.tag_type').textContent
+            var tagId
+            api.postRequest('http://localhost:8080/tags/nameToId', {
+                tagName: tagName
+            }, (id)=> 
+            {
+                tagId = id
+                getAppContext().innerHTML = Tags.renderTag(tagId);
+                
+            })
+        }
+
     })
 }
 

@@ -49,19 +49,26 @@ public class ClipController {
 	}
 	
 	@PostMapping("/addClip")
-	public Collection<Clip> addClip(@RequestBody String newMovie) throws JSONException{
-		JSONObject json = new JSONObject(newMovie);
-		Actress actress = actressRepo.findById(Long.parseLong(json.getString("artistId"))).get();
-		Movie movie = new Movie(json.getString("name"), json.getString("image"));
-		movie.addActressToMovie(actress);
+	public Collection<Clip> addClip(@RequestBody String newClip) throws JSONException{
+		JSONObject json = new JSONObject(newClip);
+		Movie movie = movieRepo.findById(Long.parseLong(json.getString("movieId"))).get();
+		Clip clip = new Clip(json.getString("name"), json.getString("clipLocation"));
+		clip.addMovieToClip(movie);
 		return (Collection<Clip>) clipRepo.findAll();
+	}
+	
+	@PostMapping("/nameToId")
+	public Long convertNameToId(@RequestBody String clipName) throws JSONException {
+		JSONObject json = new JSONObject(clipName);
+		Long clipId = clipRepo.findByName(json.getString("clipName")).getId();
+		return clipId;
 	}
 	
 	@PostMapping("/addClipSpecific")
 	public Movie addClipSpecific(@RequestBody String newClip) throws JSONException{
 		JSONObject json = new JSONObject(newClip);
 		Movie movie = movieRepo.findById(Long.parseLong(json.getString("movieId"))).get();
-		Clip clip = new Clip(json.getString("clipLocation"));
+		Clip clip = new Clip(json.getString("name"), json.getString("clipLocation"));
 		clip.addMovieToClip(movie);
 		clipRepo.save(clip);
 		return movie;

@@ -7,4 +7,5 @@ import org.wecancodeit.collectionmasteryapi.models.Clip;
 @Repository
 public interface ClipRepository extends CrudRepository<Clip, Long> {
 
+		Clip findByName(String name);
 }

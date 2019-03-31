@@ -1,5 +1,6 @@
 package org.wecancodeit.collectionmasteryapi.controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.Resource;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wecancodeit.collectionmasteryapi.models.Actress;
+import org.wecancodeit.collectionmasteryapi.models.Clip;
 import org.wecancodeit.collectionmasteryapi.models.Movie;
-import org.wecancodeit.collectionmasteryapi.models.Rating;
 import org.wecancodeit.collectionmasteryapi.models.Tag;
 import org.wecancodeit.collectionmasteryapi.repositories.ActressRepository;
 import org.wecancodeit.collectionmasteryapi.repositories.ClipRepository;
@@ -43,11 +44,47 @@ public class TagController {
 		return (Collection<Tag>) tagRepo.findAll();
 	}
 	
-	@GetMapping("/{movieId}")
+	@GetMapping("/{tagId}")
 	public Tag getTag(@PathVariable Long tagId) {
 		return tagRepo.findById(tagId).get();
 	}
-		
+	
+	@GetMapping("/{tagId}/Actress")
+	public Collection<Actress> getActressesOfTag(@PathVariable Long tagId) {
+		Collection<Actress> actressList = new ArrayList<Actress>();
+		Tag tag = tagRepo.findById(tagId).get();
+		for (Actress actress: actressRepo.findAll()) {
+			if (actress.checkTagInActress(tag)) {
+				actressList.add(actress);
+			}
+		}
+		return actressList;
+	}
+	
+	@GetMapping("/{tagId}/Movie")
+	public Collection<Movie> getMoviesOfTag(@PathVariable Long tagId) {
+		Collection<Movie> movieList = new ArrayList<Movie>();
+		Tag tag = tagRepo.findById(tagId).get();
+		for (Movie movie: movieRepo.findAll()) {
+			if (movie.checkTagInMovie(tag)) {
+				movieList.add(movie);
+			}
+		}
+		return movieList;
+	}
+	
+	@GetMapping("/{tagId}/Clip")
+	public Collection<Clip> getClipsOfTag(@PathVariable Long tagId) {
+		Collection<Clip> clipList = new ArrayList<Clip>();
+		Tag tag = tagRepo.findById(tagId).get();
+		for (Clip clip: clipRepo.findAll()) {
+			if (clip.checkTagInClip(tag)) {
+				clipList.add(clip);
+			}
+		}
+		return clipList;
+	}
+	
 	@PostMapping("/nameToId")
 	public Long convertNameToId(@RequestBody String tagName) throws JSONException {
 		JSONObject json = new JSONObject(tagName);

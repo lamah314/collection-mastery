@@ -20,6 +20,8 @@ public class Clip {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	private String name;
 
 	private String clipLocation;
 
@@ -38,6 +40,10 @@ public class Clip {
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public String getClipLocation() {
@@ -63,7 +69,8 @@ public class Clip {
 	public Clip() {
 	}
 
-	public Clip(String clipLocation) {
+	public Clip(String name, String clipLocation) {
+		this.name = name;
 		this.clipLocation = clipLocation;
 		this.tags = new ArrayList<Tag>();
 		this.ratings = new ArrayList<Rating>();
@@ -87,7 +94,7 @@ public class Clip {
 		return this.movie.equals(movie);
 	}
 
-	public boolean checkTagInArtist(Tag tag) {
+	public boolean checkTagInClip(Tag tag) {
 		return tags.contains(tag);
 	}
 

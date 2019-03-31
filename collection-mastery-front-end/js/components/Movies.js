@@ -1,5 +1,6 @@
 import Clips from './Clips'
 import Add from './Add'
+import Tags from './Tags'
 
 
 function renderMovies(movies) {
