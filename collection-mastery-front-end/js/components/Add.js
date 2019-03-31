@@ -1,6 +1,7 @@
 import Actresses from './Actresses'
 import Movies from './Movies'
 import Clips from './Clips'
+import Tags from './Tags'
 import api from '../utils/api/api-actions'
 
 
@@ -127,51 +128,58 @@ function addRatingActress(actress) {
         `
 }
 
-function addTagActress(actress) {
+function addTag() {
+    return `
+    <section class="add__tag__actress">
+        <h3>Add a Tag</h3>
+        <input type="text" class="add__tag--tag" placeholder="tag">
+        <button class="add__tag--submit clickable">Add Tag</button>
+    </section> 
+        `
+}
+
+function addTagToActress(actress) {
+    api.getRequest('http://localhost:8080/tags', tags => {
+        document.querySelector('.add__tag').innerHTML = Tags.listTags(tags)
+    })
+
     return `
     <section class="add__tag__actress">
         <h3>Add Tag to Actress</h3>
         <input type="hidden" class="add__actressId" value="${actress.id}">
-        <select type="select" class="add__rating" placeholder="Choose Rating">
-            <option value=1>1</option> 
-            <option value=2>2</option>
-            <option value=3>3</option>
-            <option value=4>4</option>
-            <option value=5>5</option> 
+        <select type="select" class="add__tag" placeholder="Choose Tag">
         </select>
-        <button class="add__actressRating--submit clickable">Add Tag</button>
+        <button class="add__actressTag--submit clickable">Add Tag</button>
     </section> 
         `
 }
 
-function addTagMovie(movie) {
+function addTagToMovie(movie) {
+    api.getRequest('http://localhost:8080/tags', tags => {
+        document.querySelector('.add__tag').innerHTML = Tags.listTags(tags)
+    })
     return `
     <section class="add__tag__movie">
         <h3>Add Tag to Movie</h3>
         <input type="hidden" class="add__movieId" value="${movie.id}">
-        <select type="select" class="add__rating" placeholder="Choose Rating">
-            <option value=1>1</option> 
-            <option value=2>2</option>
-            <option value=3>3</option>
-            <option value=4>4</option>
-            <option value=5>5</option> 
+        <select type="select" class="add__tag" placeholder="Choose Tag">
+            
         </select>
-        <button class="add__movieRating--submit clickable">Add Tag</button>
+        <button class="add__movieTag--submit clickable">Add Tag</button>
     </section> 
         `
 }
 
-function addTagClip(clip) {
+function addTagToClip(clip) {
+    api.getRequest('http://localhost:8080/tags', tags => {
+        document.querySelector('.add__tag').innerHTML = Tags.listTags(tags)
+    })
     return `
     <section class="add__tag__clip">
         <h3>Add Tag to Clip</h3>
         <input type="hidden" class="add__clipId" value="${clip.id}">
-        <select type="select" class="add__rating" placeholder="Choose Rating">
-            <option value=1>1</option> 
-            <option value=2>2</option>
-            <option value=3>3</option>
-            <option value=4>4</option>
-            <option value=5>5</option> 
+        <select type="select" class="add__tag" placeholder="Choose Tag">
+    
         </select>
         <button class="add__clipRating--submit clickable">Add Tag</button>
     </section> 
@@ -189,7 +197,8 @@ export default {
     addRatingActress,
     addClipSpecific,
     addMovieSpecific,
-    addTagActress,
-    addTagMovie,
-    addTagClip
+    addTag,
+    addTagToActress,
+    addTagToMovie,
+    addTagToClip
 }

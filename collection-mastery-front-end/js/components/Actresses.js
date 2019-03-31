@@ -46,7 +46,7 @@ function renderActressAndMovies(actress) {
     <div class="user-input">
         ${Add.addMovieSpecific(actress)}
         ${Add.addRatingActress(actress)}
-        ${Add.addTagActress(actress)}
+        ${Add.addTagToActress(actress)}
     </div>
         `;
 

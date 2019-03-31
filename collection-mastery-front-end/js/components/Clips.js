@@ -45,7 +45,8 @@ function renderClip(clip) {
         <h4 class="clip__comments">Comments</h4>
             ${Comments.renderClipComments(clip)}
         <div class="user-input">
-            ${Add.addRatingAndCommentClip(clip)}
+            ${Add.addRatingClip(clip)}
+            ${Add.addTagToClip(clip)}
         </div>
         `;
         // Adding the Ability // 

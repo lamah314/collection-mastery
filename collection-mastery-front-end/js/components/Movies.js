@@ -77,7 +77,7 @@ function renderMovieAndClips(movie) {
         <div class="user-input">
             ${Add.addClipSpecific(movie)}
             ${Add.addRatingMovie(movie)}
-            ${Add.addTagMovie(movie)}
+            ${Add.addTagToMovie(movie)}
         </div>           
     `;
 }
