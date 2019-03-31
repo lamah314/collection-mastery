@@ -20,19 +20,16 @@ function header() {
     events.on(getHeaderContext(), 'click', () => {
         if (event.target.classList.contains('header-title')) {
             getAppContext().innerHTML = LandingPage();
-            // api.getRequest('http://localhost:8080/actresses, actresses => {
            
         }
         if (event.target.classList.contains('nav-actress')) {
         api.getRequest('http://localhost:8080/actresses', actresses => {
-            // api.getRequest('/actresses', (actresses) => { // Original Code 
 
                 getAppContext().innerHTML = Actresses.renderActresses(actresses);
             })
         }
         if (event.target.classList.contains('nav-movie')) {
             api.getRequest('http://localhost:8080/movies', movies => {
-            // api.getRequest('/movies', (movies) => { // Original Code
                 getAppContext().innerHTML = Movies.renderMoviesAdd(movies);
             })
         }
@@ -49,40 +46,53 @@ function main() {
 
     getAppContext().innerHTML = LandingPage();
 
-    // events.on(getAppContext(), 'click', () => {
-    //     if (event.target.classList.contains('artist__name')) {
-    //         const artistName = event.target.parentElement.querySelector('.artist__name').textContent
-    //         var artistId
-    //         api.postRequest('/artists/nameToId', {
-    //             artistName: artistName
-    //         }, (id)=> 
-    //         {
-    //             artistId = id
-    //             api.getRequest(('/artists/' + artistId), (artist) => {
-    //                 getAppContext().innerHTML = Artists.renderArtistAndAlbumsAndSongs(artist);
-    //             })
-    //         })
-    //     }
-    //     if (event.target.classList.contains('actress__image')) {
-    //         const artistName = event.target.parentElement.querySelector('.artist__name').textContent
-    //         var artistId
-    //         api.postRequest('/actresses/nameToId', {
-    //             artistName: artistName
-    //         }, (id)=> 
-    //         {
-    //             artistId = id
-    //             api.getRequest(('/artists/' + artistId), (artist) => {
-    //                 getAppContext().innerHTML = Artists.renderArtistAndAlbumsAndSongs(artist);
-    //             })
-    //         })
-    //     }
+    events.on(getAppContext(), 'click', () => {
+        if (event.target.classList.contains('actress__name')) {
+            const actressName = event.target.parentElement.querySelector('.actress__name').textContent
+            var actressId
+            api.postRequest('/actresses/nameToId', {
+                actressName: actressName
+            }, (id)=> 
+            {
+                actressId = id
+                api.getRequest(('/actresses/' + actressId), (actress) => {
+                    getAppContext().innerHTML = Actresses.renderActressAndMovies(actress);
+                })
+            })
+        }
+        if (event.target.classList.contains('actress__image')) {
+            const actressName = event.target.parentElement.querySelector('.actress__name').textContent
+            var actressId
+            api.postRequest('/actresses/nameToId', {
+                actressName: actressName
+            }, (id)=> 
+            {
+                actressId = id
+                api.getRequest(('/actresses/' + actressId), (actress) => {
+                    getAppContext().innerHTML = Actresses.renderActressAndMovies(actress);
+                })
+            })
+        }
+        if (event.target.classList.contains('movie__name')) {
+            const movieName = event.target.parentElement.querySelector('.movie__name').textContent
+            var movieId
+            api.postRequest('/movies/nameToId', {
+                movieName: movieName
+            }, (id)=> 
+            {
+                movieId = id
+                api.getRequest(('/movies/' + movieId), (movie) => {
+                    getAppContext().innerHTML = Movies.renderActressMovieAndClips(actress);
+                })
+            })
+        }
        
-    // })
+    })
 }
 
 function footer() {
 
-    getAppContext().innerHTML = Footer();
+    getFooterContext().innerHTML = Footer();
 
 }
 

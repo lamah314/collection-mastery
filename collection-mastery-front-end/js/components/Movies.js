@@ -71,9 +71,19 @@ function renderMovieAndClips(movie) {
             ${Comments.renderMovieComments(movie)} 
         <div class="user-input">
             ${Add.addClipSpecific(movie)}
-            ${Add.addRatingAndCommentMovie(movie)}
+            ${Add.addRatingMovie(movie)}
+            ${Add.addTagMovie(movie)}
         </div>           
     `;
+}
+
+function listMovies(movies) {
+    return (movies.map(movie => {
+        return `   
+            <option value="${movie.id}">${movie.name}</option>    
+            `;
+    })
+        .join(""))
 }
 
 export default {
@@ -81,5 +91,6 @@ export default {
     renderMoviesAdd,
     renderMoviesAndClips,
     renderMoviesHeaderAndClips,
-    renderMovieAndClips
+    renderMovieAndClips,
+    listMovies
 }

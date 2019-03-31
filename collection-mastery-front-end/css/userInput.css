@@ -5,9 +5,9 @@
     align-items: center;
     background-color: black;
     color: var(--secondary);
-    border: orangered 5px solid;
+    border: pink 5px solid;
     position: fixed;
-    bottom: 0 ;
+    bottom: 50px ;
     right: 0;
 }
 
