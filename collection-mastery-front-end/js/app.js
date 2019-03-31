@@ -34,7 +34,8 @@ function header() {
             })
         }
         if (event.target.classList.contains('nav-clip')) {
-            api.getRequest('/clips', (clips) => {
+            api.getRequest('http://localhost:8080/clips', clips => {
+            // api.getRequest('/clips', (clips) => { // Original Code 
                 getAppContext().innerHTML = Clips.renderClipsAdd(clips);
             })
         }

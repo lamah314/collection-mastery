@@ -6,7 +6,7 @@ function renderActresses(actresses) {
     <div>
         <ul class="actresses">
         ${actresses.map(actress => {
-            // Actress accesses 
+        // Actress accesses 
         return ` 
                     <li class="actress">
                         <h5 class="actress__name clickable">${actress.name}</h5>
