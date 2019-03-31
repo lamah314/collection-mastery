@@ -19,6 +19,14 @@ function renderClips(clips) {
         `;
 
 }
+
+function renderClipsHeader(clips) {
+    return `
+    <div>
+    <h4 class="clip__header">Clips</h4>
+    ${renderClips(clips)}
+    `
+}
 // Adding Clips //
 function renderClipsAdd(clips) {
     return `
@@ -43,6 +51,6 @@ function renderClip(clip) {
         // Adding the Ability // 
 }
 export default {
-    renderClipsAdd, renderClip, renderClips
+    renderClipsAdd, renderClip, renderClips, renderClipsHeader
 }
         

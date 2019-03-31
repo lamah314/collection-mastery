@@ -5,7 +5,7 @@ import api from '../utils/api/api-actions'
 
 
 function addMovie() {
-    api.getRequest('/actresses', actresses => {
+    api.getRequest('http://localhost:8080/actresses', actresses => {
         document.querySelector('.add__movie-actress').innerHTML = Actresses.listActresses(actresses)
     })
     return `
@@ -60,7 +60,7 @@ function addClipSpecific(movie) {
 }
 
 function addClip() {
-    api.getRequest('/movies', movies => {
+    api.getRequest('http://localhost:8080/movies', movies => {
         document.querySelector('.add__clip--movie').innerHTML = Movies.listMovies(movies)
     })
 

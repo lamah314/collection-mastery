@@ -36,7 +36,7 @@ function listActresses(actresses) {
         .join(""))
 }
 
-function renderActressAndMovies(actresses) {
+function renderActressAndMovies(actress) {
     return ` 
     <div>
         <h5 class="actress__name clickable">${actress.name}</h5>
@@ -44,7 +44,9 @@ function renderActressAndMovies(actresses) {
         ${Movies.renderMovies(actress.movies)}
     </div>
     <div class="user-input">
+        ${Add.addMovieSpecific(actress)}
         ${Add.addRatingActress(actress)}
+        ${Add.addTagActress(actress)}
     </div>
         `;
 

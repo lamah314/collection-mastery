@@ -86,7 +86,7 @@ public class MovieController {
 	@PostMapping("/addTag")
 	public Movie AddTagToMovie(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
-		Tag tag = new Tag(json.getString("tag"));
+		Tag tag = tagRepo.findById(Long.parseLong(json.getString("tagId"))).get();
 		Movie movie = movieRepo.findById(Long.parseLong(json.getString("movieId"))).get();
 		movie.addTagToMovie(tag);
 		movieRepo.save(movie);
