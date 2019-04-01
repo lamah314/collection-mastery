@@ -90,9 +90,9 @@ public class Movie {
 		for (Tag tag: tags) {
 			tag.deleteMovieFromTag(this);
 		}
-//		for (Clip clip: clips) {
-//			clip.deleteMovieFromClip(this);
-//		}
+		for (Clip clip: clips) {
+			clip.deleteMovieFromClip();
+		}
 
 	}
 
@@ -102,6 +102,14 @@ public class Movie {
 
 	public void deleteActressFromMovie(Actress actress) {
 		actresses.remove(actress);
+	}
+	
+	public void deleteClipFromMovie(Clip clip) {
+		clips.remove(clip);
+	}
+	
+	public void deleteTagFromMovie(Tag tag) {
+		tags.remove(tag);
 	}
 
 	public void addRatingToMovie(Rating rating) {
@@ -132,5 +140,7 @@ public class Movie {
 			avgRating = sum / count;
 		}
 	}
+
+	
 
 }

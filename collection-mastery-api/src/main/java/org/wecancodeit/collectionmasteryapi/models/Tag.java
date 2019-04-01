@@ -100,17 +100,21 @@ public class Tag {
 	public boolean checkClipInTag(Clip clip) {
 		return clips.contains(clip);
 	}
-//			// Removing Tag 
-//	public void removeCollections() {
-//		for (Actress actress: movies) {
-//			tag.deleteActressFromTag(this);
-//		}
-//		for (Movie movie: movies) {
-//			movie.deleteActressFromMovie(this);
-//		}
-// 	
-//		
-//	}
+			
+	// Removing Tag 
+	public void removeCollections() {
+		for (Actress actress: actresses) {
+			actress.deleteTagFromActress(this);
+		}
+		for (Movie movie: movies) {
+			movie.deleteTagFromMovie(this);
+		}
+		for (Clip clip: clips) {
+			clip.deleteTagFromClip(this);
+		}
+ 	
+		
+	}
 
 
 

@@ -54,6 +54,7 @@ public class ClipController {
 		Movie movie = movieRepo.findById(Long.parseLong(json.getString("movieId"))).get();
 		Clip clip = new Clip(json.getString("name"), json.getString("clipLocation"));
 		clip.addMovieToClip(movie);
+		clipRepo.save(clip);
 		return (Collection<Clip>) clipRepo.findAll();
 	}
 	
@@ -93,4 +94,14 @@ public class ClipController {
 		clipRepo.save(clip);
 		return clip;
 	}
+	// Removing Clips
+	@PostMapping("/removeClip")
+	public Collection<Clip> removeClip(@RequestBody String clipId) throws JSONException{
+		JSONObject json = new JSONObject(clipId);
+		Clip clip = clipRepo.findById(Long.parseLong(json.getString("clipId"))).get();
+		clip.removeCollections();
+		clipRepo.delete(clip);
+		return (Collection<Clip>) clipRepo.findAll();
+	}
+	
 }

@@ -47,6 +47,21 @@ function removeMovie() {
         `
 }
 
+function removeClip() {
+    api.getRequest('http://localhost:8080/clips', clips => {
+        document.querySelector('.remove__list--clip').innerHTML = Clips.listClips(clips)
+    })
+    return `
+    <section class="add__movie">
+        <h3>Remove a Movie</h3>
+        
+            <select type="select" class="remove__list--clip" placeholder="Pick Clip">
+            </select>                 
+            <button class="remove__clip--submit clickable">Remove Clip</button>
+        </section>
+        `
+}
+
 export default {
-    removeActress, removeTag, removeMovie
+    removeActress, removeTag, removeMovie, removeClip
 }

@@ -1,4 +1,5 @@
 import Add from './Add'
+import Remove from './Remove'
 import Tags from './Tags'
 
 // List the Clips // 
@@ -35,6 +36,7 @@ function renderClipsAdd(clips) {
     ${renderClips(clips)}
     <div class="user-input">
         ${Add.addClip()}
+        ${Remove.removeClip()}
     </div>
         `;
 }
@@ -53,7 +55,17 @@ function renderClip(clip) {
         `;
         // Adding the Ability // 
 }
+
+function listClips(clips) {
+    return (clips.map(clip => {
+        return `   
+            <option value="${clip.id}">${clip.name}</option>    
+            `;
+    })
+        .join(""))
+}
+
 export default {
-    renderClipsAdd, renderClip, renderClips, renderClipsHeader
+    renderClipsAdd, renderClip, renderClips, renderClipsHeader, listClips
 }
         

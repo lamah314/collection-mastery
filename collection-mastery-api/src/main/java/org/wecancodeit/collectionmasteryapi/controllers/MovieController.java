@@ -51,18 +51,20 @@ public class MovieController {
 	@PostMapping("/addMovie")
 	public Collection<Movie> addMovie(@RequestBody String newMovie) throws JSONException{
 		JSONObject json = new JSONObject(newMovie);
-		Actress actress = actressRepo.findById(Long.parseLong(json.getString("artistId"))).get();
+		Actress actress = actressRepo.findById(Long.parseLong(json.getString("actressId"))).get();
 		Movie movie = new Movie(json.getString("name"), json.getString("image"));
 		movie.addActressToMovie(actress);
+		movieRepo.save(movie);
 		return (Collection<Movie>) movieRepo.findAll();
 	}
 	
 	@PostMapping("/addMovieSpecific")
 	public Actress addMovieSpecific(@RequestBody String newMovie) throws JSONException{
 		JSONObject json = new JSONObject(newMovie);
-		Actress actress = actressRepo.findById(Long.parseLong(json.getString("artistId"))).get();
+		Actress actress = actressRepo.findById(Long.parseLong(json.getString("actressId"))).get();
 		Movie movie = new Movie(json.getString("name"), json.getString("image"));
 		movie.addActressToMovie(actress);
+		movieRepo.save(movie);
 		return actress;
 	}
 	

@@ -74,6 +74,9 @@ function renderMoviesHeader(movies) {
 function renderMovieAndClips(movie) {
     return `
         <h2 class="movie__name">${movie.name}</h2> 
+        <h4 class="movie__rating">Average Rating: ${movie.avgRating}</h4>
+        <h4 class="movie__tags">Tags</h4>
+            ${Tags.renderTags(movie.tags)}
         <img class= "movie__image" src="${movie.image}" />  
             ${Clips.renderClipsHeader(movie.clips)}  
         <br>

@@ -104,7 +104,7 @@ public class TagController {
 	public Collection<Tag> removeTag(@RequestBody String tagId) throws JSONException{
 		JSONObject json = new JSONObject(tagId);
 		Tag tag = tagRepo.findById(Long.parseLong(json.getString("tagId"))).get();
-		// tag.removeCollections();
+		tag.removeCollections();
 		tagRepo.delete(tag);
 		return (Collection<Tag>) tagRepo.findAll();
 	}

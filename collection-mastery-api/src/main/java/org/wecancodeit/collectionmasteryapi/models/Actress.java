@@ -83,6 +83,10 @@ public class Actress{
 		}
 	}
 	
+	public void deleteTagFromActress(Tag tag) {
+		tags.remove(tag);
+	}
+	
 	public void addMovieToActress(Movie movie) {
 		movies.add(movie);
 	}
@@ -117,5 +121,7 @@ public class Actress{
 			avgRating = sum/count;
 		}
 	}
+
+
 
 }

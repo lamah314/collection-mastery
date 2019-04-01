@@ -62,6 +62,9 @@ function renderActressAndMovies(actress) {
     return ` 
     <div>
         <h5 class="actress__name clickable">${actress.name}</h5>
+        <h4 class="actress__rating">Average Rating: ${actress.avgRating}</h4>
+        <h4 class="actress__tags">Tags</h4>
+            ${Tags.renderTags(actress.tags)}
         <img class="actress__image clickable"src="${actress.image}" /> 
         ${Movies.renderMoviesHeader(actress.movies)}
     </div>

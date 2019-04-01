@@ -21,10 +21,6 @@ function renderTags(tags) {
         .join("")}
         </ul>
     </div>
-    <div class="user-input">
-    ${Add.addTag()}
-    ${Remove.removeTag()}
-</div>
         `;
 
 }
@@ -35,6 +31,7 @@ function renderTagsAdd(tags) {
         ${renderTags(tags)}
         <div class="user-input">
             ${Add.addTag()}
+            ${Remove.removeTag()}
         </div>
         `;
 

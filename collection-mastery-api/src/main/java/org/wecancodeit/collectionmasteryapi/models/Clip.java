@@ -93,11 +93,22 @@ public class Clip {
 		tags.add(tag);
 	}
 	
-//	public void deleteMovieFromClip(Movie movie) {
-//		movie.remove(movie);
-//	}
-//
+	public void deleteMovieFromClip() {
+		this.movie = null;
+	}
+	
+	public void deleteTagFromClip(Tag tag) {
+		tags.remove(tag);
+	}
 
+	// Removing Clip
+	public void removeCollections() {
+		for (Tag tag: tags) {
+			tag.deleteClipFromTag(this);
+		}
+		movie.deleteClipFromMovie(this);
+	}
+	
 	public boolean checkMovieInClip(Movie movie) {
 		return this.movie.equals(movie);
 	}
