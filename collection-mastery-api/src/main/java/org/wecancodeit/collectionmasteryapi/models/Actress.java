@@ -8,6 +8,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,23 +22,17 @@ public class Actress{
 
 	private String image;
 	
-	private String height;
+	@ManyToMany(mappedBy = "actresses")
+	private Collection<Movie> movies;
 
-	@OneToMany(mappedBy = "artist")
-	private Collection<Album> albums;
-
-	@OneToMany(mappedBy = "artist")
-	private Collection<Song> songs;
+	@ManyToMany
+	private Collection<Tag> tags;
 	
 	@ElementCollection
 	@CollectionTable
-	private Collection<Rating> artistRatings;
+	private Collection<Rating> ratings;
 	
 	private double avgRating;
-
-	@ElementCollection
-	@CollectionTable
-	private Collection<Comment> artistComments;
 
 	public Long getId() {
 		return id;
@@ -51,24 +46,20 @@ public class Actress{
 		return name;
 	}
 
-	public Collection<Album> getAlbums() {
-		return albums;
+	public Collection<Movie> getMovies() {
+		return movies;
 	}
 
-	public Collection<Song> getSongs() {
-		return songs;
+	public Collection<Tag> getTags() {
+		return tags;
 	}
 	
-	public Collection<Rating> getArtistRatings() {
-		return artistRatings;
+	public Collection<Rating> getRatings() {
+		return ratings;
 	}
 	
 	public double getAvgRating() {
 		return avgRating;
-	}
-
-	public Collection<Comment> getArtistComments() {
-		return artistComments;
 	}
 
 	public Actress() {
@@ -77,38 +68,52 @@ public class Actress{
 	public Actress(String name, String image) {
 		this.name = name;
 		this.image = image;
-		this.albums = new ArrayList<Album>();
-		this.songs = new ArrayList<Song>();
-		this.artistRatings = new ArrayList<Rating>();
-		this.artistComments = new ArrayList<Comment>();
+		this.movies = new ArrayList<Movie>();
+		this.tags = new ArrayList<Tag>();
+		this.ratings = new ArrayList<Rating>();
 		calculateAvgRating();
 	}
 
-	public void addAlbumToArtist(Album album) {
-		albums.add(album);
+	public void removeCollections() {
+		for (Movie movie: movies) {
+			movie.deleteActressFromMovie(this);
+		}
+		for (Tag tag: tags) {
+			tag.deleteActressFromTag(this);
+		}
 	}
+	
+	public void deleteTagFromActress(Tag tag) {
+		tags.remove(tag);
+	}
+	
+	public void addMovieToActress(Movie movie) {
+		movies.add(movie);
+	}
+	
+	
 
-  public void addRatingToArtist(Rating rating) {
-		artistRatings.add(rating);
+  public void addRatingToActress(Rating rating) {
+	  	ratings.add(rating);
 		calculateAvgRating();
 	}
 	
-	public void addCommentToArtist(Comment comment) {
-		artistComments.add(comment);
+	public void addTagToActress(Tag tag) {
+		tags.add(tag);
 	}
 	
-	public boolean checkAlbumInArtist(Album album) {
-		return albums.contains(album);
+	public boolean checkMovieInActress(Movie movie) {
+		return movies.contains(movie);
 	}
 	
-	public boolean checkCommentInArtist(Comment comment) {
-		return artistComments.contains(comment);
+	public boolean checkTagInActress(Tag tag) {
+		return tags.contains(tag);
 	}
 	
 	public void calculateAvgRating() {
 		double count=0;
 		double sum =0;
-		for (Rating rating : artistRatings) {
+		for (Rating rating : ratings) {
 			sum += rating.getRating();
 			count++;
 		}
@@ -116,5 +121,7 @@ public class Actress{
 			avgRating = sum/count;
 		}
 	}
+
+
 
 }

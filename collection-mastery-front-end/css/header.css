@@ -1,7 +1,7 @@
 .header {
     width: 100%;
-    color: var(--secondary);
-    background-color: var(--primary);
+    color: var(--tertiary);
+    background-image: linear-gradient(to right,var(--primary),var(--secondary));
     top: 0;
     /* height: 100px; */
     display: flex;
@@ -41,6 +41,6 @@
 
 .nav-list li:hover {
     transform: scale(1.2);
-    background-color:  orangered;
+    background-color:  fuchsia;
 
 }

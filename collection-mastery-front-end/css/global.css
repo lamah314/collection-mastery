@@ -7,28 +7,20 @@
 a {
     text-decoration: none;
 } */
+
 html {
-    --primary: black;
+    --primary: purple;
     --secondary: white;
-    --tertiary: rgb(80, 80, 80);
+    --tertiary: orange;
     font: 20px/1.618 sans-serif;
-    
 }
-body{
-    color: whitesmoke;
-    background: url('../html/img/guitar.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+
+body {
+
 }
 
 #app {
     width: minmax(300px, 50wh);
-}
-
-.clickable:hover {
-    cursor: url(../html/img/flaming.gif) 32 30, auto;
 }
 
 li {

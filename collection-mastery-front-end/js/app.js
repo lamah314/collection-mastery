@@ -1,218 +1,325 @@
-import events from './Utils/Events/event-actions'
-import api from './Utils/API/api-actions'
-import Artists from './Components/Artists'
-import Albums from './Components/Albums'
-import Songs from './Components/Songs'
+import events from './utils/events/event-actions'
+import api from './utils/api/api-actions'
+import Actresses from './Components/Actresses'
+import Movies from './Components/Movies'
+import Clips from './Components/Clips'
+import Tags from './Components/Tags'
 import Header from './Components/header'
 import LandingPage from './Components/landingPage'
+import Footer from './Components/footer'
 
 header()
 main()
+footer()
 
 function header() {
+
     getHeaderContext().innerHTML = Header()
 
+    // Main Page // 
+
     events.on(getHeaderContext(), 'click', () => {
-        if (event.target.classList.contains('logo')) {
-            api.getRequest('/artists', (artists) => {
-                getAppContext().innerHTML = LandingPage();
+        if (event.target.classList.contains('header-title')) {
+            getAppContext().innerHTML = LandingPage();
+
+        }
+        if (event.target.classList.contains('nav-actress')) {
+            api.getRequest('http://localhost:8080/actresses', actresses => {
+
+                getAppContext().innerHTML = Actresses.renderActresses(actresses);
             })
         }
-        if (event.target.classList.contains('nav-artist')) {
-            api.getRequest('/artists', (artists) => {
-                getAppContext().innerHTML = Artists.renderArtists(artists);
+        if (event.target.classList.contains('nav-movie')) {
+            api.getRequest('http://localhost:8080/movies', movies => {
+                getAppContext().innerHTML = Movies.renderMoviesAdd(movies);
             })
         }
-        if (event.target.classList.contains('nav-album')) {
-            api.getRequest('/albums', (albums) => {
-                getAppContext().innerHTML = Albums.renderAlbumsAdd(albums);
+        if (event.target.classList.contains('nav-clip')) {
+            api.getRequest('http://localhost:8080/clips', clips => {
+                getAppContext().innerHTML = Clips.renderClipsAdd(clips);
             })
         }
-        if (event.target.classList.contains('nav-song')) {
-            api.getRequest('/songs', (songs) => {
-                getAppContext().innerHTML = Songs.renderSongsAdd(songs);
+        if (event.target.classList.contains('nav-tag')) {
+            api.getRequest('http://localhost:8080/tags', tags => {
+                getAppContext().innerHTML = Tags.renderTagsAdd(tags);
             })
         }
-    })  
+    })
 }
 
 function main() {
 
-    api.getRequest('/artists', artists => {
-        getAppContext().innerHTML = LandingPage();
-    })
+    getAppContext().innerHTML = LandingPage();
 
     events.on(getAppContext(), 'click', () => {
-        if (event.target.classList.contains('artist__name')) {
-            const artistName = event.target.parentElement.querySelector('.artist__name').textContent
-            var artistId
-            api.postRequest('/artists/nameToId', {
-                artistName: artistName
-            }, (id)=> 
-            {
-                artistId = id
-                api.getRequest(('/artists/' + artistId), (artist) => {
-                    getAppContext().innerHTML = Artists.renderArtistAndAlbumsAndSongs(artist);
+        //Go to specific Actress
+        if (event.target.classList.contains('actress__name')) {
+            const actressName = event.target.parentElement.querySelector('.actress__name').textContent
+            var actressId
+            api.postRequest('http://localhost:8080/actresses/nameToId', {
+                actressName: actressName
+            }, (id) => {
+                actressId = id
+                api.getRequest(('http://localhost:8080/actresses/' + actressId), (actress) => {
+                    getAppContext().innerHTML = Actresses.renderActressAndMovies(actress);
                 })
             })
         }
-        if (event.target.classList.contains('artist__image')) {
-            const artistName = event.target.parentElement.querySelector('.artist__name').textContent
-            var artistId
-            api.postRequest('/artists/nameToId', {
-                artistName: artistName
-            }, (id)=> 
-            {
-                artistId = id
-                api.getRequest(('/artists/' + artistId), (artist) => {
-                    getAppContext().innerHTML = Artists.renderArtistAndAlbumsAndSongs(artist);
+         //Go to specific Actress
+        if (event.target.classList.contains('actress__image')) {
+            const actressName = event.target.parentElement.querySelector('.actress__name').textContent
+            var actressId
+            api.postRequest('http://localhost:8080/actresses/nameToId', {
+                actressName: actressName
+            }, (id) => {
+                actressId = id
+                api.getRequest(('http://localhost:8080/actresses/' + actressId), (actress) => {
+                    getAppContext().innerHTML = Actresses.renderActressAndMovies(actress);
                 })
             })
         }
-        if (event.target.classList.contains('album__title')) {
-            const albumTitle = event.target.parentElement.querySelector('.album__title').textContent
-            var albumId
-            api.postRequest('/albums/nameToId', {
-                albumTitle: albumTitle
-            }, (id)=> 
-            {
-                albumId = id
-                api.getRequest(('/albums/' + albumId), (album) => {
-                    getAppContext().innerHTML = Albums.renderAlbumAndSongs(album);
+         //Go to specific Movie
+        if (event.target.classList.contains('movie__name')) {
+            const movieName = event.target.parentElement.querySelector('.movie__name').textContent
+            var movieId
+            api.postRequest('http://localhost:8080/movies/nameToId', {
+                movieName: movieName
+            }, (id) => {
+                movieId = id
+                api.getRequest(('http://localhost:8080/movies/' + movieId), (movie) => {
+                    getAppContext().innerHTML = Movies.renderMovieAndClips(movie);
                 })
-            })     
+            })
         }
-        if (event.target.classList.contains('album__image')) {
-            const albumTitle = event.target.parentElement.querySelector('.album__title').textContent
-            var albumId
-            api.postRequest('/albums/nameToId', {
-                albumTitle: albumTitle
-            }, (id)=> 
-            {
-                albumId = id
-                api.getRequest(('/albums/' + albumId), (album) => {
-                    getAppContext().innerHTML = Albums.renderAlbumAndSongs(album);
+         //Go to specific Movie
+        if (event.target.classList.contains('movie__image')) {
+            const movieName = event.target.parentElement.querySelector('.movie__name').textContent
+            var movieId
+            api.postRequest('http://localhost:8080/movies/nameToId', {
+                movieName: movieName
+            }, (id) => {
+                movieId = id
+                api.getRequest(('http://localhost:8080/movies/' + movieId), (movie) => {
+                    getAppContext().innerHTML = Movies.renderMovieAndClips(movie);
                 })
-            })     
+            })
         }
-        if (event.target.classList.contains('song__title')) {
-            const songTitle = event.target.parentElement.querySelector('.song__title').textContent
-            var songId
-            api.postRequest('/songs/nameToId', {
-                songTitle: songTitle
-            }, (id)=> 
-            {
-                songId = id
-                api.getRequest(('/songs/' + songId), (song) => {
-                    getAppContext().innerHTML = Songs.renderSong(song);
+         //Go to specific Clip
+        if (event.target.classList.contains('clip__name')) {
+            const clipName = event.target.parentElement.querySelector('.clip__name').textContent
+            var clipId
+            api.postRequest('http://localhost:8080/clips/nameToId', {
+                clipName: clipName
+            }, (id) => {
+                clipId = id
+                api.getRequest(('http://localhost:8080/clips/' + clipId), (clip) => {
+                    getAppContext().innerHTML = Clips.renderClip(clip);
                 })
-            })    
+            })
         }
+         //Go to specific Tag
+        if (event.target.classList.contains('tag_type')) {
+            const tagName = event.target.parentElement.querySelector('.tag_type').textContent
+            var tagId
+            api.postRequest('http://localhost:8080/tags/nameToId', {
+                tagName: tagName
+            }, (id) => {
+                tagId = id
+                getAppContext().innerHTML = Tags.renderTag(tagId);
 
-        if (event.target.classList.contains('add__artist--submit')) {
-            const name = event.target.parentElement.querySelector('.add__artist--name').value
-            const image = event.target.parentElement.querySelector('.add__artist--image').value
-            api.postRequest('/artists/addArtist', {
+            })
+        }
+        // Adding Actress
+        if (event.target.classList.contains('add__actress--submit')) {
+            const name = event.target.parentElement.querySelector('.add__actress--name').value
+            const image = event.target.parentElement.querySelector('.add__actress--image').value
+            api.postRequest('http://localhost:8080/actresses/addActress', {
                 name: name,
                 image: image
-            }, (artists) => {
-                console.log(artists);
-                getAppContext().innerHTML = Artists.renderArtists(artists);
+            }, (actresses) => {
+                getAppContext().innerHTML = Actresses.renderActresses(actresses);
             })
         }
-        if (event.target.classList.contains('add__album--submit')) {
-            const artist = event.target.parentElement.querySelector('.add__album--artist').value
-            const title = event.target.parentElement.querySelector('.add__album--title').value
-            const image = event.target.parentElement.querySelector('.add__album--image').value
-            const recordLabel = event.target.parentElement.querySelector('.add__album--recordLabel').value
-            api.postRequest('/albums/addAlbum', {
-                artist: artist,
-                title: title,
-                image: image,
-                recordLabel: recordLabel
-            }, (albums) => {
-                getAppContext().innerHTML = Albums.renderAlbumsAdd(albums);
+
+        // Adding Movie
+        if (event.target.classList.contains('add__movie--submit')) {
+            const actressId = event.target.parentElement.querySelector('.add__movie--actress').value
+            const name = event.target.parentElement.querySelector('.add__movie--name').value
+            const image = event.target.parentElement.querySelector('.add__movie--image').value
+            api.postRequest('http://localhost:8080/movies/addMovie', {
+                actressId: actressId,
+                name: name,
+                image: image
+            }, (movies) => {
+                getAppContext().innerHTML = Movies.renderMoviesAdd(movies);
             })
         }
-        if (event.target.classList.contains('add__albumSpecific--submit')) {
-            const artist = event.target.parentElement.querySelector('.add__album--artist').value
-            const title = event.target.parentElement.querySelector('.add__album--title').value
-            const image = event.target.parentElement.querySelector('.add__album--image').value
-            const recordLabel = event.target.parentElement.querySelector('.add__album--recordLabel').value
-            api.postRequest('/albums/addAlbumSpecific', {
-                artist: artist,
-                title: title,
-                image: image,
-                recordLabel: recordLabel
-            }, (artist) => {
-                getAppContext().innerHTML = Artists.renderArtistAndAlbumsAndSongs(artist);
+
+        // Adding Movie Specific
+        if (event.target.classList.contains('add__movieSpecific--submit')) {
+            const actressId = event.target.parentElement.querySelector('.add__movie--actress').value
+            const name = event.target.parentElement.querySelector('.add__movie--name').value
+            const image = event.target.parentElement.querySelector('.add__movie--image').value
+            api.postRequest('http://localhost:8080/movies/addMovieSpecific', {
+                actressId: actressId,
+                name: name,
+                image: image
+            }, (actress) => {
+                getAppContext().innerHTML = Actresses.renderActressAndMovies(actress);
             })
         }
-        if (event.target.classList.contains('add__song--submit')) {
-            const album = event.target.parentElement.querySelector('.add__song--album').value
-            const title = event.target.parentElement.querySelector('.add__song--title').value
-            const link = event.target.parentElement.querySelector('.add__song--link').value
-            const duration = event.target.parentElement.querySelector('.add__song--duration').value
-            api.postRequest('/songs/addSong', {
-                album: album,
-                title: title,
-                link: link,
-                duration: duration
-            }, (songs) => {
-                    getAppContext().innerHTML = Songs.renderSongsAdd(songs);
+
+         // Adding Clip
+         if (event.target.classList.contains('add__clip--submit')) {
+            const movieId = event.target.parentElement.querySelector('.add__clip--movie').value
+            const name = event.target.parentElement.querySelector('.add__clip--name').value
+            const clipLocation = event.target.parentElement.querySelector('.add__clip--clipLocation').value
+            api.postRequest('http://localhost:8080/clips/addClip', {
+                movieId: movieId,
+                name: name,
+                clipLocation: clipLocation
+            }, (clips) => {
+                getAppContext().innerHTML = Clips.renderClipsAdd(clips);
             })
         }
-        if (event.target.classList.contains('add__songSpecific--submit')) {
-            const album = event.target.parentElement.querySelector('.add__song--album').value
-            const title = event.target.parentElement.querySelector('.add__song--title').value
-            const link = event.target.parentElement.querySelector('.add__song--link').value
-            const duration = event.target.parentElement.querySelector('.add__song--duration').value
-            api.postRequest('/songs/addSongSpecific', {
-                album: album,
-                title: title,
-                link: link,
-                duration: duration
-            }, (album) => {
-                    getAppContext().innerHTML =  Albums.renderAlbumAndSongs(album);
+
+        // Adding Clip Specific
+        if (event.target.classList.contains('add__clipSpecific--submit')) {
+            const movieId = event.target.parentElement.querySelector('.add__clip--movie').value
+            const name = event.target.parentElement.querySelector('.add__clip--name').value
+            const clipLocation = event.target.parentElement.querySelector('.add__clip--clipLocation').value
+            api.postRequest('http://localhost:8080/clips/addClipSpecific', {
+                movieId: movieId,
+                name: name,
+                clipLocation: clipLocation
+            }, (movie) => {
+                getAppContext().innerHTML = Movies.renderMovieAndClips(movie);
             })
         }
-        if (event.target.classList.contains('add__songRatingComment--submit')) {
-            const songId = event.target.parentElement.querySelector('.add__songId').value
+
+        // Adding Tag
+        if (event.target.classList.contains('add__tag--submit')) {
+            const tag = event.target.parentElement.querySelector('.add__tag--tag').value
+            api.postRequest('http://localhost:8080/tags/addTag', {
+                tag:tag
+            }, (tags) => {
+                getAppContext().innerHTML = Tags.renderTagsAdd(tags);
+            })
+        }
+
+        // Adding Rating To Actress
+        if (event.target.classList.contains('add__actressRating--submit')) {
+            const actressId = event.target.parentElement.querySelector('.add__actressId').value
             const rating = event.target.parentElement.querySelector('.add__rating').value
-            const comment = event.target.parentElement.querySelector('.add__comment--content').value
-            api.postRequest('/songs/addRatingComment', {
-                songId: songId,
-                rating: rating,
-                comment: comment
-            }, (song) => {
-                getAppContext().innerHTML = Songs.renderSong(song);
+            api.postRequest('http://localhost:8080/actresses/addRating', {
+                actressId:actressId,
+                rating:rating
+            }, (actress) => {
+                getAppContext().innerHTML = Actresses.renderActressAndMovies(actress);
             })
         }
-        if (event.target.classList.contains('add__albumRatingComment--submit')) {
-            const albumId = event.target.parentElement.querySelector('.add__albumId').value
+
+        // Adding Rating To Movie
+        if (event.target.classList.contains('add__movieRating--submit')) {
+            const movieId = event.target.parentElement.querySelector('.add__movieId').value
             const rating = event.target.parentElement.querySelector('.add__rating').value
-            const comment = event.target.parentElement.querySelector('.add__comment--content').value
-            api.postRequest('/albums/addRatingComment', {
-                albumId: albumId,
-                rating: rating,
-                comment: comment
-            }, (album) => {
-                getAppContext().innerHTML = Albums.renderAlbumAndSongs(album);
+            api.postRequest('http://localhost:8080/movies/addRating', {
+                movieId:movieId,
+                rating:rating
+            }, (movie) => {
+                getAppContext().innerHTML = Movies.renderMovieAndClips(movie);
             })
         }
-        if (event.target.classList.contains('add__artistRatingComment--submit')) {
-            const artistId = event.target.parentElement.querySelector('.add__artistId').value
+
+        // Adding Rating To Clip
+        if (event.target.classList.contains('add__clipRating--submit')) {
+            const clipId = event.target.parentElement.querySelector('.add__clipId').value
             const rating = event.target.parentElement.querySelector('.add__rating').value
-            const comment = event.target.parentElement.querySelector('.add__comment--content').value
-            api.postRequest('/artists/addRatingComment', {
-                artistId: artistId,
-                rating: rating,
-                comment: comment
-            }, (artist) => {
-                getAppContext().innerHTML = Artists.renderArtistAndAlbumsAndSongs(artist);
+            api.postRequest('http://localhost:8080/clips/addRating', {
+                clipId:clipId,
+                rating:rating
+            }, (clip) => {
+                getAppContext().innerHTML = Clips.renderClip(clip);
             })
         }
+
+        // Adding Tag To Actress
+        if (event.target.classList.contains('add__actressTag--submit')) {
+            const actressId = event.target.parentElement.querySelector('.add__actressId').value
+            const tagId = event.target.parentElement.querySelector('.add__tag').value
+            api.postRequest('http://localhost:8080/actresses/addTag', {
+                actressId:actressId,
+                tagId:tagId
+            }, (actress) => {
+                getAppContext().innerHTML = Actresses.renderActressAndMovies(actress);
+            })
+        }
+
+        // Adding Tag To Movie
+        if (event.target.classList.contains('add__movieTag--submit')) {
+            const movieId = event.target.parentElement.querySelector('.add__movieId').value
+            const tagId = event.target.parentElement.querySelector('.add__tag').value
+            api.postRequest('http://localhost:8080/movies/addTag', {
+                movieId:movieId,
+                tagId:tagId
+            }, (movie) => {
+                getAppContext().innerHTML = Movies.renderMovieAndClips(movie);
+            })
+        }
+
+        // Adding Tag To Clip
+        if (event.target.classList.contains('add__clipTag--submit')) {
+            const clipId = event.target.parentElement.querySelector('.add__clipId').value
+            const tagId = event.target.parentElement.querySelector('.add__tag').value
+            api.postRequest('http://localhost:8080/clips/addTag', {
+                clipId:clipId,
+                tagId:tagId
+            }, (clip) => {
+                getAppContext().innerHTML = Clips.renderClip(clip);
+            })
+        }
+
+        // Removing Actresses // 
+        if (event.target.classList.contains('remove__actress--submit')) {
+            var actressId = event.target.parentElement.querySelector('.remove__list--actress').value
+            api.postRequest('http://localhost:8080/actresses/removeActress', {
+                actressId: actressId
+            }, (actresses) => {
+                getAppContext().innerHTML = Actresses.renderActresses(actresses);
+            })
+        }
+        // Removing Movies // 
+        if (event.target.classList.contains('remove__movie--submit')) {
+            var movieId = event.target.parentElement.querySelector('.remove__list--movie').value
+            api.postRequest('http://localhost:8080/movies/removeMovie', {
+                movieId: movieId
+            }, (movies) => {
+                getAppContext().innerHTML = Movies.renderMoviesAdd(movies);
+            })
+        }
+        // Removing Clips // 
+        if (event.target.classList.contains('remove__clip--submit')) {
+            var clipId = event.target.parentElement.querySelector('.remove__list--clip').value
+            api.postRequest('http://localhost:8080/clips/removeClip', {
+                clipId: clipId
+            }, (clips) => {
+                getAppContext().innerHTML = Clips.renderClipsAdd(clips);
+            })
+        }
+        // Removing Tags //
+        if (event.target.classList.contains('remove__tag--submit')) {
+            var tagId = event.target.parentElement.querySelector('.remove__list--tag').value
+            api.postRequest('http://localhost:8080/tags/removeTag', {
+                tagId: tagId
+            }, (tags) => {
+                getAppContext().innerHTML = Tags.renderTagsAdd(tags);
+            })
+        }  
     })
+}
+
+function footer() {
+    getFooterContext().innerHTML = Footer();
 }
 
 function getHeaderContext() {
@@ -221,4 +328,8 @@ function getHeaderContext() {
 
 function getAppContext() {
     return document.querySelector("#app");
+}
+
+function getFooterContext() {
+    return document.querySelector("#footer");
 }

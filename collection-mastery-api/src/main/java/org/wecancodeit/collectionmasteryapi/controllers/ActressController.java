@@ -6,32 +6,32 @@ import javax.annotation.Resource;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.wecancodeit.albumcollection.models.Album;
-import org.wecancodeit.albumcollection.models.Artist;
-import org.wecancodeit.albumcollection.models.Comment;
-import org.wecancodeit.albumcollection.models.Rating;
-import org.wecancodeit.albumcollection.repositories.AlbumRepository;
-import org.wecancodeit.albumcollection.repositories.ArtistRepository;
-import org.wecancodeit.albumcollection.repositories.SongRepository;
-import org.wecancodeit.albumcollection.repositories.TagRepository;
+import org.wecancodeit.collectionmasteryapi.models.Actress;
+import org.wecancodeit.collectionmasteryapi.models.Rating;
+import org.wecancodeit.collectionmasteryapi.models.Tag;
+import org.wecancodeit.collectionmasteryapi.repositories.ActressRepository;
+import org.wecancodeit.collectionmasteryapi.repositories.ClipRepository;
+import org.wecancodeit.collectionmasteryapi.repositories.MovieRepository;
+import org.wecancodeit.collectionmasteryapi.repositories.TagRepository;
 
-
+@CrossOrigin
 @RestController
-@RequestMapping("/artists")
+@RequestMapping("/actresses")
 public class ActressController {
 	
 	@Resource
-	ActressRepository artistRepo;
+	ActressRepository actressRepo;
 	@Resource
-	AlbumRepository albumRepo;
+	MovieRepository movieRepo;
 	@Resource
-	SongRepository songRepo;
+	ClipRepository clipRepo;
 	
 	@Resource
 	TagRepository tagRepo;
@@ -42,38 +42,55 @@ public class ActressController {
 //	}
 	
 	@GetMapping("")
-	public Collection<Artist> getArtists() {
-		return (Collection<Artist>) artistRepo.findAll();
+	public Collection<Actress> getActresses() {
+		return (Collection<Actress>) actressRepo.findAll();
 	}
 	
-	@GetMapping("/{artistId}")
-	public Artist getArtist(@PathVariable Long artistId) {
-		return artistRepo.findById(artistId).get();
+	@GetMapping("/{actressId}")
+	public Actress getActress(@PathVariable Long actressId) {
+		return actressRepo.findById(actressId).get();
 	}
 	
-	@PostMapping("/addArtist")
-	public Collection<Artist> addArtist(@RequestBody String newArtist) throws JSONException{
-		JSONObject json = new JSONObject(newArtist);
-		artistRepo.save(new Artist(json.getString("name"), json.getString("image")));
-		return (Collection<Artist>) artistRepo.findAll();
+	@PostMapping("/addActress")
+	public Collection<Actress> addArtist(@RequestBody String newActress) throws JSONException{
+		JSONObject json = new JSONObject(newActress);
+		actressRepo.save(new Actress(json.getString("name"), json.getString("image")));
+		return (Collection<Actress>) actressRepo.findAll();
+	}
+	
+	@PostMapping("/removeActress")
+	public Collection<Actress> removeArtist(@RequestBody String actressId) throws JSONException{
+		JSONObject json = new JSONObject(actressId);
+		Actress actress = actressRepo.findById(Long.parseLong(json.getString("actressId"))).get();
+		actress.removeCollections();
+		actressRepo.delete(actress);
+		return (Collection<Actress>) actressRepo.findAll();
 	}
 	
 	@PostMapping("/nameToId")
-	public Long convertNameToId(@RequestBody String artistName) throws JSONException {
-		JSONObject json = new JSONObject(artistName);
-		Long artistId = artistRepo.findByName(json.getString("artistName")).getId();
-		return artistId;
+	public Long convertNameToId(@RequestBody String actressName) throws JSONException {
+		JSONObject json = new JSONObject(actressName);
+		Long actressId = actressRepo.findByName(json.getString("actressName")).getId();
+		return actressId;
 	}
 	
-	@PostMapping("/addRatingComment")
-	public Artist AddRatingCommentToArtist(@RequestBody String body) throws JSONException {
+	@PostMapping("/addRating")
+	public Actress AddRatingToActress(@RequestBody String body) throws JSONException {
 		JSONObject json = new JSONObject(body);
 		Rating rating = new Rating(Integer.parseInt(json.getString("rating")));
-		Comment comment = new Comment(json.getString("comment"));
-		Artist artist = artistRepo.findById(Long.parseLong(json.getString("artistId"))).get();
-		artist.addRatingToArtist(rating);
-		artist.addCommentToArtist(comment);
-		artistRepo.save(artist);
-		return artist;
+		Actress actress = actressRepo.findById(Long.parseLong(json.getString("actressId"))).get();
+		actress.addRatingToActress(rating);
+		actressRepo.save(actress);
+		return actress;
+	}
+	
+	@PostMapping("/addTag")
+	public Actress AddTagToActress(@RequestBody String body) throws JSONException {
+		JSONObject json = new JSONObject(body);
+		Tag tag = tagRepo.findById(Long.parseLong(json.getString("tagId"))).get();
+		Actress actress = actressRepo.findById(Long.parseLong(json.getString("actressId"))).get();
+		actress.addTagToActress(tag);
+		actressRepo.save(actress);
+		return actress;
 	}
 }
