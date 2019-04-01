@@ -77,6 +77,9 @@ public class Clip {
 		calculateAvgRating();
 	}
 
+
+
+
 	public void addMovieToClip(Movie movie) {
 		this.movie = movie;
 	}
@@ -89,6 +92,11 @@ public class Clip {
 	public void addTagToClip(Tag tag) {
 		tags.add(tag);
 	}
+	
+//	public void deleteMovieFromClip(Movie movie) {
+//		movie.remove(movie);
+//	}
+//
 
 	public boolean checkMovieInClip(Movie movie) {
 		return this.movie.equals(movie);
@@ -109,5 +117,6 @@ public class Clip {
 			avgRating = sum / count;
 		}
 	}
+
 
 }

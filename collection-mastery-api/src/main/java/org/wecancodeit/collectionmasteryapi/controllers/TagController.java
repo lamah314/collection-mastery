@@ -99,4 +99,13 @@ public class TagController {
 		tagRepo.save(tag);
 		return (Collection<Tag>) tagRepo.findAll();
 	}
+	// Removing Tags 
+	@PostMapping("/removeTag")
+	public Collection<Tag> removeTag(@RequestBody String tagId) throws JSONException{
+		JSONObject json = new JSONObject(tagId);
+		Tag tag = tagRepo.findById(Long.parseLong(json.getString("tagId"))).get();
+		// tag.removeCollections();
+		tagRepo.delete(tag);
+		return (Collection<Tag>) tagRepo.findAll();
+	}
 }

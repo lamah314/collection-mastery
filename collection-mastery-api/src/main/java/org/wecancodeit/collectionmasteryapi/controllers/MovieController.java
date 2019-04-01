@@ -92,4 +92,14 @@ public class MovieController {
 		movieRepo.save(movie);
 		return movie;
 	}
+	
+	// Removing Movies 
+	@PostMapping("/removeMovie")
+	public Collection<Movie> removeMovie(@RequestBody String movieId) throws JSONException{
+		JSONObject json = new JSONObject(movieId);
+		Movie movie = movieRepo.findById(Long.parseLong(json.getString("movieId"))).get();
+		movie.removeCollections();
+		movieRepo.delete(movie);
+		return (Collection<Movie>) movieRepo.findAll();
+	}
 }

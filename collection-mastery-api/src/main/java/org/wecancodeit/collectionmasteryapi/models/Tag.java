@@ -73,6 +73,14 @@ public class Tag {
 		actresses.remove(actress);
 	}
 	
+	public void deleteMovieFromTag(Movie movie) {
+		movies.remove(movie);
+	}
+	
+	public void deleteClipFromTag(Clip clip) {
+		clips.remove(clip);
+	}
+	
 	public void addMovietoTag(Movie movie) {
 		movies.add(movie);
 	}
@@ -92,6 +100,17 @@ public class Tag {
 	public boolean checkClipInTag(Clip clip) {
 		return clips.contains(clip);
 	}
+//			// Removing Tag 
+//	public void removeCollections() {
+//		for (Actress actress: movies) {
+//			tag.deleteActressFromTag(this);
+//		}
+//		for (Movie movie: movies) {
+//			movie.deleteActressFromMovie(this);
+//		}
+// 	
+//		
+//	}
 
 
 

@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Movie{
+public class Movie {
 
 	@Id
 	@GeneratedValue
@@ -23,21 +23,21 @@ public class Movie{
 	private String name;
 
 	private String image;
-	
+
 	@ManyToMany
 	@JsonIgnore
 	private Collection<Actress> actresses;
 
 	@ManyToMany
 	private Collection<Tag> tags;
-	
+
 	@ElementCollection
 	@CollectionTable
 	private Collection<Rating> ratings;
-	
+
 	@OneToMany(mappedBy = "movie")
 	private Collection<Clip> clips;
-	
+
 	private double avgRating;
 
 	public Long getId() {
@@ -59,15 +59,15 @@ public class Movie{
 	public Collection<Tag> getTags() {
 		return tags;
 	}
-	
+
 	public Collection<Rating> getRatings() {
 		return ratings;
 	}
-	
+
 	public Collection<Clip> getClips() {
 		return clips;
 	}
-	
+
 	public double getAvgRating() {
 		return avgRating;
 	}
@@ -85,43 +85,52 @@ public class Movie{
 		calculateAvgRating();
 	}
 
+	// Removing Movie
+	public void removeCollections() {
+		for (Tag tag: tags) {
+			tag.deleteMovieFromTag(this);
+		}
+//		for (Clip clip: clips) {
+//			clip.deleteMovieFromClip(this);
+//		}
+
+	}
+
 	public void addActressToMovie(Actress actress) {
 		actresses.add(actress);
 	}
-	
+
 	public void deleteActressFromMovie(Actress actress) {
 		actresses.remove(actress);
 	}
-	
+
 	public void addRatingToMovie(Rating rating) {
 		ratings.add(rating);
 		calculateAvgRating();
 	}
-	
+
 	public void addTagToMovie(Tag tag) {
 		tags.add(tag);
 	}
-	
+
 	public boolean checkActressInMovie(Actress actress) {
 		return actresses.contains(actress);
 	}
-	
+
 	public boolean checkTagInMovie(Tag tag) {
 		return tags.contains(tag);
 	}
-	
+
 	public void calculateAvgRating() {
-		double count=0;
-		double sum =0;
+		double count = 0;
+		double sum = 0;
 		for (Rating rating : ratings) {
 			sum += rating.getRating();
 			count++;
 		}
 		if (count > 0) {
-			avgRating = sum/count;
+			avgRating = sum / count;
 		}
 	}
-
-	
 
 }

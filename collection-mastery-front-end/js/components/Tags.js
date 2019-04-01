@@ -3,6 +3,7 @@ import Movies from './Movies'
 import Clips from './Clips'
 import Add from './Add'
 import api from '../utils/api/api-actions'
+import Remove from './Remove'
 
 // List All Tags //
 
@@ -16,10 +17,14 @@ function renderTags(tags) {
                     <h5 class="tag_type clickable">${tag.tag}</h5>
                     </li>
                     `;
-        })
+        }) // Adding and Removing Actresses //
         .join("")}
         </ul>
     </div>
+    <div class="user-input">
+    ${Add.addTag()}
+    ${Remove.removeTag()}
+</div>
         `;
 
 }

@@ -16,11 +16,11 @@ function renderActresses(actresses) {
                     </li>
                     `;
 
-    })
+    }) // Adding and Removing Actresses // 
             .join("")}
         </ul>
     </div>
-    <div class="user-input">
+    <div class="user-input"> 
     ${Add.addActress()}
     ${Remove.removeActress()}
 </div>

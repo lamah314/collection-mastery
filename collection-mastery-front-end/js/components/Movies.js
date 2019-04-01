@@ -1,6 +1,8 @@
 import Clips from './Clips'
 import Add from './Add'
+import Remove from './Remove'
 import Tags from './Tags'
+
 
 
 function renderMovies(movies) {
@@ -28,6 +30,7 @@ function renderMoviesAdd(movies) {
         ${renderMovies(movies)}
         <div class="user-input">
         ${Add.addMovie()}
+        ${Remove.removeMovie()}
     </div>
         `;
 }

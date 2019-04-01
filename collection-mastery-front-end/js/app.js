@@ -21,10 +21,10 @@ function header() {
     events.on(getHeaderContext(), 'click', () => {
         if (event.target.classList.contains('header-title')) {
             getAppContext().innerHTML = LandingPage();
-           
+
         }
         if (event.target.classList.contains('nav-actress')) {
-        api.getRequest('http://localhost:8080/actresses', actresses => {
+            api.getRequest('http://localhost:8080/actresses', actresses => {
 
                 getAppContext().innerHTML = Actresses.renderActresses(actresses);
             })
@@ -36,17 +36,17 @@ function header() {
         }
         if (event.target.classList.contains('nav-clip')) {
             api.getRequest('http://localhost:8080/clips', clips => {
-            // api.getRequest('/clips', (clips) => { // Original Code 
+                // api.getRequest('/clips', (clips) => { // Original Code 
                 getAppContext().innerHTML = Clips.renderClipsAdd(clips);
             })
         }
         if (event.target.classList.contains('nav-tag')) {
             api.getRequest('http://localhost:8080/tags', tags => {
-            // api.getRequest('/clips', (clips) => { // Original Code 
+                // api.getRequest('/clips', (clips) => { // Original Code 
                 getAppContext().innerHTML = Tags.renderTagsAdd(tags);
             })
         }
-    })  
+    })
 }
 
 function main() {
@@ -59,8 +59,7 @@ function main() {
             var actressId
             api.postRequest('http://localhost:8080/actresses/nameToId', {
                 actressName: actressName
-            }, (id)=> 
-            {
+            }, (id) => {
                 actressId = id
                 api.getRequest(('http://localhost:8080/actresses/' + actressId), (actress) => {
                     getAppContext().innerHTML = Actresses.renderActressAndMovies(actress);
@@ -72,8 +71,7 @@ function main() {
             var actressId
             api.postRequest('http://localhost:8080/actresses/nameToId', {
                 actressName: actressName
-            }, (id)=> 
-            {
+            }, (id) => {
                 actressId = id
                 api.getRequest(('http://localhost:8080/actresses/' + actressId), (actress) => {
                     getAppContext().innerHTML = Actresses.renderActressAndMovies(actress);
@@ -85,8 +83,7 @@ function main() {
             var movieId
             api.postRequest('http://localhost:8080/movies/nameToId', {
                 movieName: movieName
-            }, (id)=> 
-            {
+            }, (id) => {
                 movieId = id
                 api.getRequest(('http://localhost:8080/movies/' + movieId), (movie) => {
                     getAppContext().innerHTML = Movies.renderMovieAndClips(movie);
@@ -98,8 +95,7 @@ function main() {
             var movieId
             api.postRequest('http://localhost:8080/movies/nameToId', {
                 movieName: movieName
-            }, (id)=> 
-            {
+            }, (id) => {
                 movieId = id
                 api.getRequest(('http://localhost:8080/movies/' + movieId), (movie) => {
                     getAppContext().innerHTML = Movies.renderMovieAndClips(movie);
@@ -111,8 +107,7 @@ function main() {
             var clipId
             api.postRequest('http://localhost:8080/clips/nameToId', {
                 clipName: clipName
-            }, (id)=> 
-            {
+            }, (id) => {
                 clipId = id
                 api.getRequest(('http://localhost:8080/clips/' + clipId), (clip) => {
                     getAppContext().innerHTML = Clips.renderClip(clip);
@@ -124,23 +119,42 @@ function main() {
             var tagId
             api.postRequest('http://localhost:8080/tags/nameToId', {
                 tagName: tagName
-            }, (id)=> 
-            {
+            }, (id) => {
                 tagId = id
                 getAppContext().innerHTML = Tags.renderTag(tagId);
-                
+
             })
         }
-        
+        // Removing Actresses // 
         if (event.target.classList.contains('remove__actress--submit')) {
             var actressId = event.target.parentElement.querySelector('.remove__list--actress').value
             api.postRequest('http://localhost:8080/actresses/removeActress', {
                 actressId: actressId
-            }, (actresses)=> 
-            {
+            }, (actresses) => {
                 getAppContext().innerHTML = Actresses.renderActresses(actresses);
             })
+
         }
+        // // Removing Tags //
+        // if (event.target.classList.contains('remove__tag--submit')) {
+        //     var tagId = event.target.parentElement.querySelector('.remove__list--tag').value
+        //     api.postRequest('http://localhost:8008/tags/removeTag', {
+        //         tagId: tagId
+
+        //     }, (tags) => {
+        //         getAppContext().innerHTML = Tags.renderTags(tags);
+        //     })
+        // }
+        // // Removing Movies // 
+        // if (event.target.classList.contains('remove__movie--submit')) {
+        //     var movieId = event.target.parentElement.querySelector('.remove__list--movie').value
+        //     api.postRequest('http://localhost:8008/movies/removeMovie', {
+        //         movieId: movieId
+
+        //     }, (movies) => {
+        //         getAppContext().innerHTML = Movies.renderMoviesAdd(movies);
+        //     })
+        // }
     })
 }
 
